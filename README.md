@@ -2,6 +2,11 @@
 
 一块豆腐和一头进了信息学算法竞赛中国集训队的🐷写的 Typecho 极简风格响应式主题。
 
+Demo: 
+
++ [豆腐的 Blog](https://tntofu.com/)
++ [🐷的 Blog](http://www.whalemaid.xyz/)
+
 # 特性
 
 + 我们自己觉得挺好看的
