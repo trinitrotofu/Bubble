@@ -64,7 +64,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<input type="email" name="mail" id="mail" class="form-control" placeholder="Emal" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+								<input type="email" name="mail" id="mail" class="form-control" placeholder="Email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
 							</div>
 						</div>
 						<div class="col-md-4">
