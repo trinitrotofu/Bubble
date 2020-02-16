@@ -32,11 +32,15 @@
 				</svg>
 			</div>
 		</section>
-		<!-- Article content -->
+		<!-- Page content -->
 		<section class="section">
 			<div class="container">
 				<div class="content">
 					<?php $this->content(); ?>
+					<hr/>
+					<?php if($this->user->hasLogin()) : ?>
+						<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button">修改页面</button></a>
+					<?php endif; ?>
 				</div>
 			</div>
 		</section>

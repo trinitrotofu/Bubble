@@ -59,17 +59,32 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
-								<input type="text" name="author" id="author" class="form-control" placeholder="名称" value="<?php $this->remember('author'); ?>" required />
+								<div class="input-group mb-4">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+									</div>
+									<input type="text" name="author" id="author" class="form-control" placeholder="名称" value="<?php $this->remember('author'); ?>" required />
+								</div>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<input type="email" name="mail" id="mail" class="form-control" placeholder="Email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+								<div class="input-group mb-4">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="ni ni-email-83"></i></span>
+									</div>
+									<input type="email" name="mail" id="mail" class="form-control" placeholder="Email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+								</div>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<input type="url" name="url" id="url" class="form-control" placeholder="网站" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
+								<div class="input-group mb-4">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="ni ni-world-2"></i></span>
+									</div>
+									<input type="url" name="url" id="url" class="form-control" placeholder="网站" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
+								</div>
 							</div>
 						</div>
 					</div>
