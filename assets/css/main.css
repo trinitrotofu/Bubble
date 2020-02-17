@@ -18732,7 +18732,10 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 .comment-head a {
 	color: #172b4d;
-	margin-left: 14px;
+}
+
+.comment-head h6 {
+    margin-left: 14px;
 }
 
 .comment-nav a {
