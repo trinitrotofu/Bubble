@@ -44,23 +44,25 @@
 		<?php while($this->next()): ?>
 			<section class="section">
 				<div class="container">
-					<h1><a class="text-default" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h1>
-					<hr/>
-					<h5>
-						<span class="badge badge-pill badge-danger text-uppercase"><a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a></span> &nbsp;&nbsp;
-						<span class="badge badge-pill badge-info text-uppercase"><time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time></span> &nbsp;&nbsp;
-						<span class="badge badge-pill badge-success text-uppercase"><?php $this->category('d'); ?></span>
-					</h5>
-					<div class="lead">
-						<?php $content = $this->content('...'); ?>
+					<div class="content">
+						<h1><a class="text-default" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h1>
+						<hr/>
+						<h5>
+							<span class="badge badge-pill badge-danger text-uppercase"><a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a></span> &nbsp;&nbsp;
+							<span class="badge badge-pill badge-info text-uppercase"><time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time></span> &nbsp;&nbsp;
+							<span class="badge badge-pill badge-success text-uppercase"><?php $this->category('d'); ?></span>
+						</h5>
+						<div class="lead">
+							<?php $content = $this->content('...'); ?>
+						</div>
+						<hr/>
+						<a href="<?php $this->permalink() ?>">
+							<button class="btn btn-icon btn-3 btn-primary" type="button">
+								<span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
+								<span class="btn-inner--text">继续阅读</span>
+							</button>
+						</a>
 					</div>
-					<hr/>
-					<a href="<?php $this->permalink() ?>">
-						<button class="btn btn-icon btn-3 btn-primary" type="button">
-							<span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-							<span class="btn-inner--text">继续阅读</span>
-						</button>
-					</a>
 				</div>
 			</section>
 		<?php endwhile; ?>
