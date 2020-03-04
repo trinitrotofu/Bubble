@@ -34,7 +34,7 @@
 						<?php $this->content(); ?>
 						<hr/>
 						<?php if($this->user->hasLogin()) : ?>
-							<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> ????</button></a>
+							<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> 修改页面</button></a>
 						<?php endif; ?>
 					</div>
 				</div>
