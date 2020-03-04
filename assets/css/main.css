@@ -18850,6 +18850,7 @@ table {
 
 .list-card {
     padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 @media screen and (max-width: 768px) {
@@ -18869,4 +18870,48 @@ table {
     margin-top: 10px;
     margin-bottom: 25px;
     color: #888;
+}
+
+.text {
+    font-size: 1rem;
+    line-height: 1.5;
+
+    width: 200px;
+    height: calc(2.75rem + 2px);
+    padding: .625rem .75rem;
+
+    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55); 
+
+    color: #8898aa;
+    border: 1px solid #cad1d7;
+    border-radius: .25rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: none;
+}
+
+.submit {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+
+    display: inline-block;
+
+    padding: .625rem 1.25rem;
+
+    -webkit-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out; 
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    border: 1px solid transparent;
+    border-radius: .25rem;
+
+    color: #fff;
+    border-color: #11cdef;
+    background-color: #11cdef;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }

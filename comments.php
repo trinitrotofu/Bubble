@@ -64,7 +64,7 @@
 				<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
 					<?php if($this->user->hasLogin()): ?>
 					<p><?php _e('已登录为'); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>。<a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('注销？'); ?></a></p>
-							<?php else: ?>
+					<?php else: ?>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
@@ -97,13 +97,13 @@
 							</div>
 						</div>
 					</div>
-							<?php endif; ?>
+					<?php endif; ?>
 					<p>
-									<textarea rows="8" cols="50" name="text" id="textarea" class="form-control" required ><?php $this->remember('text'); ?></textarea>
-							</p>
+						<textarea rows="8" cols="50" name="text" id="textarea" class="form-control" required ><?php $this->remember('text'); ?></textarea>
+					</p>
 					<p>
-									<button type="submit" class="btn btn-success"><?php _e('提交评论'); ?></button>
-							</p>
+						<button type="submit" class="btn btn-success"><?php _e('提交评论'); ?></button>
+					</p>
 				</form>
 			</div>
 			<?php else: ?>

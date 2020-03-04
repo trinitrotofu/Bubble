@@ -84,6 +84,7 @@
 			</section>
 			<?php endwhile; ?>
 			<!-- Toggle page -->
+			<?php if ($this->getTotal() > $this->parameter->pageSize) { ?>
 			<section class="section">
 				<div class="container">
 					<div class="row justify-content-md-center">
@@ -106,6 +107,7 @@
 					</div>
 				</div>
 			</section>
+			<?php } ?>
 		</div>
 
 <?php $this->need('footer.php'); ?>
