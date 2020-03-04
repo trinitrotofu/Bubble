@@ -42,13 +42,5 @@
 	<script src="<?php $this->options->themeUrl("assets/js/argon.min.js"); ?>"></script>
 	<!-- Typecho footer -->
 	<?php $this->footer(); ?>
-	<!-- Power Mode -->
-	<?php if ($this->options->powerMode) { ?>
-		<script src="<?php $this->options->themeUrl("assets/js/activate-power-mode.js"); ?>"></script>
-		<script>
-			POWERMODE.colorful = true; POWERMODE.shake = <?php if ($this->options->powerMode == 2) _e('true'); else _e('false') ?>;
-			document.body.addEventListener('input', POWERMODE);
-		</script>
-	<?php } ?>
 	</body>
 </html>
