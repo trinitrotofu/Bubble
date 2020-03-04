@@ -25,28 +25,21 @@
 					</div>
 				</div>
 			</div>
-			<!-- SVG separator -->
-			<div class="separator separator-bottom separator-skew zindex-100">
-				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-				<polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-				</svg>
-			</div>
 		</section>
-		<!-- Page content -->
-		<section class="section">
-			<div class="container">
-				<div class="content">
-					<?php $this->content(); ?>
-					<hr/>
-					<?php if($this->user->hasLogin()) : ?>
-						<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button">修改页面</button></a>
-					<?php endif; ?>
+		<div class="card shadow content-card content-card-head">
+			<!-- Page content -->
+			<section class="section">
+				<div class="container">
+					<div class="content">
+						<?php $this->content(); ?>
+						<hr/>
+						<?php if($this->user->hasLogin()) : ?>
+							<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> 修改页面</button></a>
+						<?php endif; ?>
+					</div>
 				</div>
-			</div>
-		</section>
-		<!-- Comment -->
-		<?php if($this->allow('comment')): 
-			$this->need('comments.php');
-			endif;
-		?>
+			</section>
+			<!-- Comment -->
+			<?php $this->need('comments.php'); ?>
+		</div>
 <?php $this->need('footer.php'); ?>

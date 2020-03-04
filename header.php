@@ -5,16 +5,27 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title><?php $this->options->title() ?></title>
+	<title><?php $this->archiveTitle(array(
+		'category'  =>  _t('%s下的文章'),
+		'search'    =>  _t('包含关键字 %s 的文章'),
+		'tag'       =>  _t('标签 %s 下的文章'),
+		'author'    =>  _t('%s 的文章')
+	), '', ' - '); ?><?php $this->options->title(); ?></title>
 
 	<!-- Favicon -->
-	<link href="<?php $this->options->themeUrl("images/favicon.png"); ?>" rel="icon" type="image/png">
+	<link href="<?php
+		if ($this->options->logoUrl) {
+			$this->options->logoUrl();
+		} else {
+			$this->options->themeUrl("images/logo.png");
+		}
+	?>" rel="icon" type="image/png">
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
-	<!-- Icons -->
-	<link href="<?php $this->options->themeUrl("assets/vendor/nucleo/css/nucleo.css"); ?>" rel="stylesheet">
+	<!-- FontAwesome -->
+	<link href="<?php $this->options->themeUrl("assets/vendor/font-awesome/css/font-awesome.min.css"); ?>" rel="stylesheet">
 
 	<!-- Main CSS -->
 	<link type="text/css" href="<?php $this->options->themeUrl("assets/css/main.min.css"); ?>" rel="stylesheet">
@@ -63,11 +74,11 @@
 						<li class="nav-item" style="margin-left:1rem;">
 							<form method="post" action="">
 								<div class="row">
-									<div class="input-group input-group-alternative">
-										<input type="text" name="s" class="form-control form-control-alternative" placeholder="Search" type="text">
+									<div class="input-group">
+										<input type="text" name="s" class="form-control" placeholder="Search" type="text">
 										<div class="input-group-append">
 											<button type="submit" class="btn btn-icon btn-2 btn-primary" type="button">
-												<span class="btn-inner--icon"><i class="ni ni-zoom-split-in"></i></span>
+												<span class="btn-inner--icon"><i class="fa fa-search" aria-hidden="true"></i></span>
 											</button>
 										</div>
 									</div>

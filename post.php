@@ -28,32 +28,38 @@
 					</div>
 				</div>
 			</div>
-			<!-- SVG separator -->
-			<div class="separator separator-bottom separator-skew zindex-100">
-				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-				<polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-				</svg>
-			</div>
 		</section>
-		<!-- Article content -->
-		<section class="section">
-			<div class="container">
-				<div class="content">
-					<?php $this->content(); ?>
-					<hr/>
-					<ul>
-						<li>分类：<span class="badge badge-pill badge-success text-uppercase"><?php $this->category('d'); ?></span></li>
-						<li>
-							标签：<?php $this->tags(', ', true, 'none'); ?>
-						</li>
-					</ul>
-					<?php if($this->user->hasLogin()) : ?>
-						<a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button">修改文章</button></a>
-					<?php endif; ?>
+		<div class="card shadow content-card content-card-head">
+			<!-- Article content -->
+			<section class="section">
+				<div class="container">
+					<div class="content">
+						<?php $this->content(); ?>
+						<hr/>
+						<ul>
+							<li>分类：<span class="list-tag">
+								<?php print($this->widget('Widget_Metas_Category_List')->parse('<a href="{permalink}" class="badge badge-info badge-pill">{name}</a>')) ?>
+								</span>
+							</li>
+							<li>
+								标签：<span class="list-tag">
+								<?php if (count($this->tags)>0): ?>
+									<?php foreach( $this->tags as $tags): ?>
+									<a href="<?php print($tags['permalink']) ?>" class="badge badge-success badge-pill"><?php print($tags['name']) ?></a>
+									<?php endforeach;?>
+								<?php else: ?>
+									<a class="badge badge-default badge-pill text-white">无标签</a>
+								<?php endif;?>
+								</span>
+							</li>
+						</ul>
+						<?php if($this->user->hasLogin()) : ?>
+							<a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> 修改文章</button></a>
+						<?php endif; ?>
+					</div>
 				</div>
-			</div>
-		</section>
-		<!-- Comment -->
-		<?php $this->need('comments.php'); ?>
-
+			</section>
+			<!-- Comment -->
+			<?php $this->need('comments.php'); ?>
+		</div>
 <?php $this->need('footer.php'); ?>
