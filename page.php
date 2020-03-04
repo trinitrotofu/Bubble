@@ -34,12 +34,12 @@
 						<?php $this->content(); ?>
 						<hr/>
 						<?php if($this->user->hasLogin()) : ?>
-							<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> 修改页面</button></a>
+							<a href="<?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> ????</button></a>
 						<?php endif; ?>
 					</div>
 				</div>
 			</section>
 			<!-- Comment -->
-			<?php $this->need('comments.php'); ?>
+			<?php if (!$this->hidden && $this->allow('comment')) $this->need('comments.php'); ?>
 		</div>
 <?php $this->need('footer.php'); ?>

@@ -35,6 +35,7 @@
 				<div class="container">
 					<div class="content">
 						<?php $this->content(); ?>
+						<?php if (!$this->hidden) { ?>
 						<hr/>
 						<ul>
 							<li>分类：<span class="list-tag">
@@ -53,6 +54,7 @@
 								</span>
 							</li>
 						</ul>
+						<?php } ?>
 						<?php if($this->user->hasLogin()) : ?>
 							<a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> 修改文章</button></a>
 						<?php endif; ?>
@@ -60,6 +62,6 @@
 				</div>
 			</section>
 			<!-- Comment -->
-			<?php $this->need('comments.php'); ?>
+			<?php if (!$this->hidden && $this->allow('comment')) $this->need('comments.php'); ?>
 		</div>
 <?php $this->need('footer.php'); ?>
