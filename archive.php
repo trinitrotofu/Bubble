@@ -46,19 +46,19 @@
 								<span class="list-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date();?></time></span>
 								<span class="list-tag"><i class="fa fa-comments-o" aria-hidden="true"></i> <?php $this->commentsNum('%d');?> 条评论</span>
 								<span class="list-tag"><i class="fa fa-folder-o" aria-hidden="true"></i>
-									<?php print($this->widget('Widget_Metas_Category_List')->parse('<a href="{permalink}" class="badge badge-info">{name}</a>')) ?>
+									<?php print($this->widget('Widget_Metas_Category_List')->parse('<a href="{permalink}" class="badge badge-info badge-pill">{name}</a>')) ?>
 								</span>
 								<span class="list-tag">
 								<?php if (count($this->tags)>0): ?>
 									<i class="fa fa-tags" aria-hidden="true"></i> 
 									<?php foreach( $this->tags as $tags): ?>
-									<a href="<?php print($tags['permalink']) ?>" class="badge badge-success"><?php print($tags['name']) ?></a>
+									<a href="<?php print($tags['permalink']) ?>" class="badge badge-success badge-pill"><?php print($tags['name']) ?></a>
 									<?php endforeach;?>
 								<?php else: ?>
-									<i class="fa fa-tags" aria-hidden="true"></i> <a class="badge badge-default text-white">无标签</a>
+									<i class="fa fa-tags" aria-hidden="true"></i> <a class="badge badge-default badge-pill text-white">无标签</a>
 								<?php endif;?>
 								</span>
-								<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning" href="<?php $this->author->permalink(); ?>"><?php $this->author();?></a></span>
+								<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $this->author->permalink(); ?>"><?php $this->author();?></a></span>
 							</div>
 							<?php $content = $this->content('...'); ?>
 							<br/>
