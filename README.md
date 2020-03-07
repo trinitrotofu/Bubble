@@ -25,6 +25,10 @@ PS:
 + 可在 Typecho 后台->控制台->外观->设置外观中设置主题相应功能，如站点图标
 + 你可以添加自定义样式：通过 Typecho 后台修改 `style.css` 即可（默认为空文件，若后台显示文件不可修改请注意站点目录权限设置）
 
+# 截图
+
+![](screenshot.png)
+
 # License
 
 Open sourced under the MIT license.
