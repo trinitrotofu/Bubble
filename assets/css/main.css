@@ -18915,3 +18915,39 @@ table {
     background-color: #11cdef;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
+
+.widget ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.widget li {
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.widget h5 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.page-btn {
+    right: 45px;
+    bottom: 45px;
+    position: fixed;
+    z-index: 99999;
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .page-btn {
+        right: 15px;
+        bottom: 15px;
+        height: 50px;
+        width: 50px;
+        font-size: 18px;
+    }
+}
