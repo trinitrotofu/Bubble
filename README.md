@@ -59,6 +59,7 @@ Open sourced under the MIT license.
 
 + 支持自定义首页背景图像和其他页面标题栏背景图像
 + 更新 argon design system 版本
++ 改进按钮特效
 
 # 更新历史
 ## 2.1
