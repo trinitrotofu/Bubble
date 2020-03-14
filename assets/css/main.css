@@ -18702,8 +18702,15 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 /* New CSS */
 
 .content {
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 }
 
 .content img {
@@ -18950,4 +18957,8 @@ table {
         width: 50px;
         font-size: 18px;
     }
+}
+
+p {
+    word-break: break-all;
 }
