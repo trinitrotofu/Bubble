@@ -58,6 +58,7 @@ Open sourced under the MIT license.
 # Todo
 
 + 支持自定义首页背景图像和其他页面标题栏背景图像
++ 添加“回到顶部”按钮
 
 # 更新历史
 ## 2.2
