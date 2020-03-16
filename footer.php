@@ -53,6 +53,9 @@
 					<div class="copyright">
 						Copyright © <?php $this->options->title() ?>
 					</div>
+					<?php if($this->options->bei): ?>
+			        	<div><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php $this->options->bei(); ?></a></div>
+					<?php endif; ?>
 				</div>
 				<div class="col-md-6">
 					<ul class="nav nav-footer justify-content-end">

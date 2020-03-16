@@ -7,6 +7,9 @@ function themeConfig($form) {
 	$form->addInput($avatarUrl);
 	$footerWidget = new Typecho_Widget_Helper_Form_Element_Radio('footerWidget', array('0' => _t('不显示'), '1' => _t('显示')), '1', _t('页脚小工具'), _t('选择是否在页面底部显示“最新评论”、“最新文章”等栏目'));
 	$form->addInput($footerWidget);
+
+	$bei = new Typecho_Widget_Helper_Form_Element_Text('bei', NULL, NULL, _t('工信部备案号'), _t('留空则不显示备案号'));
+	$form->addInput($bei->addRule('xssCheck', _t('不能使用特殊字符')));
 }
 
 function printCategory($that, $icon = 0) { ?>
