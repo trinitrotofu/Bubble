@@ -38,21 +38,8 @@
 						<?php if (!$this->hidden) { ?>
 						<hr/>
 						<ul>
-							<li>分类：<span class="list-tag">
-								<?php print($this->widget('Widget_Metas_Category_List')->parse('<a href="{permalink}" class="badge badge-info badge-pill">{name}</a>')) ?>
-								</span>
-							</li>
-							<li>
-								标签：<span class="list-tag">
-								<?php if (count($this->tags)>0): ?>
-									<?php foreach( $this->tags as $tags): ?>
-									<a href="<?php print($tags['permalink']) ?>" class="badge badge-success badge-pill"><?php print($tags['name']) ?></a>
-									<?php endforeach;?>
-								<?php else: ?>
-									<a class="badge badge-default badge-pill text-white">无标签</a>
-								<?php endif;?>
-								</span>
-							</li>
+							<li>分类：<?php printCategory($this); ?></li>
+							<li>标签：<?php printTag($this); ?></li>
 						</ul>
 						<?php } ?>
 					</div>

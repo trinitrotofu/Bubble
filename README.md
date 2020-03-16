@@ -61,6 +61,11 @@ Open sourced under the MIT license.
 + 添加“回到顶部”按钮
 
 # 更新历史
+## 2.2.1
+
++ 修复分类显示 Bug(issue #2)
++ 规整代码
+
 ## 2.2
 
 + 优化内容宽度设定
