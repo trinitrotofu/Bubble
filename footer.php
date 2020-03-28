@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="copyright">
-						Copyright © <?php $this->options->title() ?>
+						<?php _e($this->options->footerText); ?>
 					</div>
 				</div>
 				<div class="col-md-6">

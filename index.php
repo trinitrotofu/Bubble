@@ -4,7 +4,7 @@
  * 
  * @package Bubble
  * @author TriNitroTofu and Boshi
- * @version 2.2.1
+ * @version 2.2.2
  * @link https://github.com/trinitrotofu/Bubble
  */
 
