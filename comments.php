@@ -103,7 +103,7 @@
 							<textarea rows="8" cols="50" name="text" id="textarea" class="form-control" required ><?php $this->remember('text'); ?></textarea>
 						</p>
 						<p>
-							<button type="submit" class="btn btn-success"><?php _e('提交评论'); ?></button>
+							<button type="submit" class="btn btn-outline-success" style="float: right;"><?php _e('提交评论'); ?></button>
 						</p>
 					</form>
 				</div>

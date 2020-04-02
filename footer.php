@@ -1,11 +1,11 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 		<?php if ($this->user->hasLogin()) { ?>
 			<?php if ($this->is('single')) { ?>
-			<a href="<?php $this->options->adminUrl(); ?>write-<?php echo $this->is('post')?'post':'page'; ?>.php?cid=<?php echo $this->cid;?>"><button class="btn btn-icon-only rounded-circle btn-primary page-btn">
+			<a href="<?php $this->options->adminUrl(); ?>write-<?php echo $this->is('post')?'post':'page'; ?>.php?cid=<?php echo $this->cid;?>"><button class="btn btn-icon-only rounded-circle btn-primary admin-btn">
 				<span class="btn-inner--icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
 			</button></a>
 			<?php } else { ?>
-			<a href="<?php $this->options->adminUrl(); ?>"><button class="btn btn-icon-only rounded-circle btn-primary page-btn">
+			<a href="<?php $this->options->adminUrl(); ?>"><button class="btn btn-icon-only rounded-circle btn-primary admin-btn">
 				<span class="btn-inner--icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
 			</button></a>
 			<?php } ?>

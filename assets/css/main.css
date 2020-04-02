@@ -18722,6 +18722,10 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     padding: 0;
 }
 
+.comment-children {
+    margin-bottom: 40px;
+}
+
 .comment-children ol {
     padding-left: 40px;
 }
@@ -18761,8 +18765,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 .comment-item {
     display: flex !important;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .comment-reply {
@@ -18938,7 +18942,7 @@ table {
     margin-bottom: 20px;
 }
 
-.page-btn {
+.admin-btn {
     right: 45px;
     bottom: 45px;
     position: fixed;
@@ -18949,7 +18953,7 @@ table {
 }
 
 @media screen and (max-width: 768px) {
-    .page-btn {
+    .admin-btn {
         right: 15px;
         bottom: 15px;
         height: 50px;
@@ -18960,4 +18964,48 @@ table {
 
 p {
     word-break: break-all;
+}
+
+.shape-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-position: center center;
+    background-size: cover;
+}
+
+.shape-image:before {
+    background-color: rgba(0,0,0,0.5);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+}
+
+.index-avatar-container {
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.index-avatar {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    transition: all 1.0s;
+}
+
+.index-avatar:hover {
+    transform: rotate(360deg);
 }

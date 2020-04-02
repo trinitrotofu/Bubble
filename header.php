@@ -14,10 +14,10 @@
 
 	<!-- Favicon -->
 	<link href="<?php
-		if ($this->options->logoUrl) {
-			$this->options->logoUrl();
-		} else {
+		if ($this->options->logoUrl == '') {
 			$this->options->themeUrl("images/logo.png");
+		} else {
+			$this->options->logoUrl();
 		}
 	?>" rel="icon" type="image/png">
 
@@ -77,7 +77,7 @@
 									<div class="input-group">
 										<input type="text" name="s" class="form-control" placeholder="Search" type="text">
 										<div class="input-group-append">
-											<button type="submit" class="btn btn-icon btn-2 btn-primary" type="button">
+											<button type="submit" class="btn btn-icon btn-2 btn-primary" style="box-shadow: none;" type="button">
 												<span class="btn-inner--icon"><i class="fa fa-search" aria-hidden="true"></i></span>
 											</button>
 										</div>
