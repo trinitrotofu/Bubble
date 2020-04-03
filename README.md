@@ -57,7 +57,8 @@ Open sourced under the MIT license.
 
 # Todo
 
-暂无
++ 自定义标签，如代码块
++ 将自定义 css 移动到主题设置中实时更新
 
 # 更新历史
 ## 2.3.0
