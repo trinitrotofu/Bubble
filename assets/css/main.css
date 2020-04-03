@@ -18702,8 +18702,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 /* New CSS */
 
 .content {
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
 }
 
 @media screen and (max-width: 768px) {
