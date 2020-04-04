@@ -15,6 +15,12 @@ function themeConfig($form) {
 	$form->addInput($footerText);
 	$footerWidget = new Typecho_Widget_Helper_Form_Element_Radio('footerWidget', array('0' => _t('不显示'), '1' => _t('显示')), '1', _t('页脚小工具'), _t('选择是否在页面底部显示“最新评论”、“最新文章”等栏目'));
 	$form->addInput($footerWidget);
+	$Pjax = new Typecho_Widget_Helper_Form_Element_Radio('Pjax', array('0' => _t('关闭'), '1' => _t('打开')), '1', _t('采用Pjax加速页面访问'), _t('选择是否启用pjax，具体功能自行搜索'));
+	$form->addInput($Pjax);
+	$katex = new Typecho_Widget_Helper_Form_Element_Radio('katex', array('0' => _t('关闭'), '1' => _t('打开')), '1', _t('开启katex数学公式渲染'), _t('选择是否启用katex，具体功能自行搜索'));
+	$form->addInput($katex);
+	$pjaxcomp = new Typecho_Widget_Helper_Form_Element_Textarea('pjaxcomp', NULL, '', _t('Pjax附加代码'), _t('在这里填入需要在pjax之后刷新插件的JS代码，会在pjax刷新完后执行'));
+	$form->addInput($pjaxcomp);
 }
 
 function printCategory($that, $icon = 0) { ?>
@@ -115,4 +121,12 @@ function getRandomImage($str)
 	if ($str == '') return '';
 	$arr = explode(PHP_EOL, $str);
 	return $arr[rand(0, sizeof($arr) - 1)];
+}
+
+function clear_urlcan($url){
+    $rstr='';
+    $tmparr=parse_url($url);
+    $rstr=empty($tmparr['scheme'])?'http://':$tmparr['scheme'].'://';
+    $rstr.=$tmparr['host'].$tmparr['path'];
+    return $rstr;
 }

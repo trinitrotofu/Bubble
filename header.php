@@ -32,11 +32,20 @@
 
 	<!-- Custom CSS -->
 	<link type="text/css" href="<?php $this->options->themeUrl("style.css"); ?>" rel="stylesheet">
-
+	
+	<!-- KaTeX CSS -->
+	<?php if($this->options->katex=="1"): ?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css">
+	<? endif; ?>
+	
+	<!-- Jquery JS -->
+	<script src="<?php $this->options->themeUrl("assets/vendor/jquery/jquery.min.js"); ?>"></script>
+	
 	<!-- Typecho header -->
 	<?php $this->header(); ?>
 </head>
 <body>
+	
 	<header class="header-global">
 		<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
 			<div class="container">
@@ -72,7 +81,7 @@
 							</li>
 						<?php endwhile; ?>
 						<li class="nav-item" style="margin-left:1rem;">
-							<form method="post" action="">
+							<form method="post" action="" id="search">
 								<div class="row">
 									<div class="input-group">
 										<input type="text" name="s" class="form-control" placeholder="Search" type="text">
@@ -90,3 +99,5 @@
 			</div>
 		</nav>
 	</header>
+	
+	<div id="pjax-container">
