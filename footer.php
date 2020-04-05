@@ -87,8 +87,12 @@
 			<?php $this->options->pjaxcomp() ?>
 			<?php if($this->options->katex=="1"): ?>
 			try{
-				$('katex-inline').each(function(){t=$(this);katex.render(t.text(),t[0],{displayMode:false})})
-				$('katex').each(function(){t=$(this);katex.render(t.text(),t[0],{displayMode:true})})
+				renderMathInElement(document.body,{
+					delimiters: [
+						{left: "$$", right: "$$", display: true},
+						{left: "$", right: "$", display: false}
+					]
+				})
 			}catch{}
 			<?php endif; ?>
 			try{
