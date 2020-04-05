@@ -103,7 +103,7 @@
 							<textarea rows="8" cols="50" name="text" id="textarea" class="form-control" required ><?php $this->remember('text'); ?></textarea>
 						</p>
 						<p>
-							<button type="submit" class="btn btn-outline-success" style="float: right;"><?php _e('提交评论'); ?></button>
+							<button type="submit" class="btn btn-outline-success" id="add-comment-button" style="float: right;"><?php _e('提交评论'); ?></button>
 						</p>
 					</form>
 				</div>
@@ -114,3 +114,113 @@
 		</div>
 	</div>
 </section>
+<?php if($this->options->Pjax=="1"): ?>
+<script>
+	function bindsubmit(){
+		$("#comment-form").submit(function() {
+			$("#add-comment-button").attr("disabled",true)
+			var data = $(this).serializeArray()
+			var rubbish = <?php echo Typecho_Common::shuffleScriptVar(
+            $this->security->getToken(clear_urlcan($this->request->getRequestUrl()))); ?>
+            data.push({"name":"_","value":rubbish})
+			$.ajax({
+            url: $(this).attr("action"),
+            type: $(this).attr("method"),
+            data: data,
+            complete: function(){
+            	$("#add-comment-button").attr("disabled",false)
+            },
+            error: function() {
+                
+            },
+            success: function(data) {
+            	var newdocument = new DOMParser().parseFromString(data, "text/html")
+            	if(newdocument.title == "Error"){
+            		var error = $.trim(newdocument.getElementsByClassName("container")[0].innerText)
+            		alert("评论提交错误",error)
+            	}else{
+            		$("#comments").html(newdocument.getElementById("comments").innerHTML)
+            		bindsubmit()
+            	}
+            }
+        	})
+        	return false;
+		})
+	}
+
+	bindsubmit()
+</script>
+<? echo $this->pluginHandle()->header("", $this);?>
+<script type="text/javascript">
+    (function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('<? $this->respondId() ?>'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('<? $this->respondId() ?>'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<?php endif; ?>
