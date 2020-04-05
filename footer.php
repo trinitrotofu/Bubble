@@ -95,6 +95,7 @@
 				})
 			}catch{}
 			<?php endif; ?>
+			parseBbcode()
 			try{
 				window.onload()
 			}catch{}
