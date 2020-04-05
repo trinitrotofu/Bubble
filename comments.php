@@ -150,7 +150,7 @@
 
 	bindsubmit()
 </script>
-<? echo $this->pluginHandle()->header("", $this);?>
+<?php echo $this->pluginHandle()->header("", $this);?>
 <script type="text/javascript">
     (function () {
     window.TypechoComment = {
@@ -170,7 +170,7 @@
 
         reply : function (cid, coid) {
             var comment = this.dom(cid), parent = comment.parentNode,
-                response = this.dom('<? $this->respondId() ?>'), input = this.dom('comment-parent'),
+                response = this.dom('<?php $this->respondId() ?>'), input = this.dom('comment-parent'),
                 form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
                 textarea = response.getElementsByTagName('textarea')[0];
 
@@ -205,7 +205,7 @@
         },
 
         cancelReply : function () {
-            var response = this.dom('<? $this->respondId() ?>'),
+            var response = this.dom('<?php $this->respondId() ?>'),
             holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
 
             if (null != input) {

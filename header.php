@@ -36,7 +36,7 @@
 	<!-- KaTeX CSS -->
 	<?php if($this->options->katex=="1"): ?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css">
-	<? endif; ?>
+	<?php endif; ?>
 	
 	<!-- Jquery JS -->
 	<script src="<?php $this->options->themeUrl("assets/vendor/jquery/jquery.min.js"); ?>"></script>

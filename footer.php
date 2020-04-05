@@ -90,7 +90,7 @@
 				$('katex-inline').each(function(){t=$(this);katex.render(t.text(),t[0],{displayMode:false})})
 				$('katex').each(function(){t=$(this);katex.render(t.text(),t[0],{displayMode:true})})
 			}catch{}
-			<? endif; ?>
+			<?php endif; ?>
 			try{
 				window.onload()
 			}catch{}
@@ -119,7 +119,7 @@
 			var att = $(this).serializeArray()
 			for(var i in att){
 				if(att[i].name=="s"){
-					$.pjax({url: <? if ($this->options->rewrite): ?>"<?php $this->options->siteUrl(); ?>search/"+att[i].value+"/"<? else: ?>"<?php $this->options->siteUrl(); ?>index.php/search/"+att[i].value+"/"<? endif; ?>, container: '#pjax-container',fragment: '#pjax-container',timeout:8000})
+					$.pjax({url: <?php if ($this->options->rewrite): ?>"<?php $this->options->siteUrl(); ?>search/"+att[i].value+"/"<?php else: ?>"<?php $this->options->siteUrl(); ?>index.php/search/"+att[i].value+"/"<?php endif; ?>, container: '#pjax-container',fragment: '#pjax-container',timeout:8000})
 				}
 			}
 			return false
@@ -130,6 +130,7 @@
 	<script src="<?php $this->options->themeUrl("assets/vendor/headroom/headroom.min.js"); ?>"></script>
 	<!-- Theme JS -->
 	<script src="<?php $this->options->themeUrl("assets/js/argon.min.js"); ?>"></script>
+	<script src="<?php $this->options->themeUrl("assets/js/main.js"); ?>"></script>
 	<!-- KaTeX JS -->
 	<?php if($this->options->katex=="1"): ?>
 	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"></script>
