@@ -18870,6 +18870,9 @@ table {
         margin-bottom: 0 !important;
         border-radius: 0 !important;
     }
+    .content-card-head {
+        margin-top: 0px;
+    }
 }
 
 .list-tag {
