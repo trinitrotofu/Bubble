@@ -18714,7 +18714,9 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 }
 
 .content img {
-	max-width: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 10px auto;
 }
 
 .comment-list {
