@@ -125,10 +125,11 @@
 				var ele = $(eles[p])
 				var lis = ele.children("ol").children("li")
 				for(var j = 0; j<lis.length; j++){
-					var a = $(lis[j]).children("div[id^='comment']").children(".comment-item").children(".comment-body").children(".comment-head").children("h5").children("a")
+					var h5 = $(lis[j]).children("div[id^='comment']").children(".comment-item").children(".comment-body").children(".comment-head").children("h5")
 					var name
-					for(var i = 0; i<a.length; i++){
-						name = a[i].innerText
+					for(var i = 0; i<h5.length; i++){
+						name = h5[i].innerText
+						name = $.trim(name.split("·")[0])
 						if(name==username){
 							comlist.push(parseInt($(lis[j]).attr("id").split("-")[2]))
 						}
