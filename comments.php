@@ -116,6 +116,43 @@
 </section>
 <?php if($this->options->Pjax=="1"): ?>
 <script>
+	function focusToComment(username){
+		var comments = $("#comments").children("div")
+		getcomments = function(eles){
+			var comlist = []
+			var childrenlist = []
+			for(var p = 0; p<eles.length; p++){
+				var ele = $(eles[p])
+				var lis = ele.children("ol").children("li")
+				for(var j = 0; j<lis.length; j++){
+					var a = $(lis[j]).children("div[id^='comment']").children(".comment-item").children(".comment-body").children(".comment-head").children("h5").children("a")
+					var name
+					for(var i = 0; i<a.length; i++){
+						name = a[i].innerText
+						if(name==username){
+							comlist.push(parseInt($(lis[j]).attr("id").split("-")[2]))
+						}
+					}
+					var child = $(lis[j]).children(".comment-children")
+					if(child.length>0){
+						childrenlist.push(child)
+					}
+				}
+			}
+			if(childrenlist.length>0){
+				return comlist.concat(getcomments(childrenlist))
+			}else{
+				return comlist
+			}
+		}
+		var commentIds = getcomments(comments)
+		var commentId = Math.max(...commentIds)
+		if(commentId!=-Infinity){
+			$('html,body').animate({ scrollTop: $('#comment-'+commentId).offset().top-100}, 500)
+	    	$('#comment-'+commentId).fadeToggle(90);
+			$('#comment-'+commentId).fadeToggle(110);
+		}
+	}
 	function bindsubmit(){
 		$("#comment-form").submit(function() {
 			$("#add-comment-button").attr("disabled",true)
@@ -131,16 +168,20 @@
             	$("#add-comment-button").attr("disabled",false)
             },
             error: function() {
-                
+                alert("网络请求错误","请重新尝试提交评论")
             },
-            success: function(data) {
-            	var newdocument = new DOMParser().parseFromString(data, "text/html")
+            success: function(html) {
+            	var newdocument = new DOMParser().parseFromString(html, "text/html")
             	if(newdocument.title == "Error"){
             		var error = $.trim(newdocument.getElementsByClassName("container")[0].innerText)
             		alert("评论提交错误",error)
             	}else{
             		$("#comments").html(newdocument.getElementById("comments").innerHTML)
             		bindsubmit()
+					var authorName = $("#author").val()
+					if(authorName){
+						focusToComment(authorName)
+					}
             	}
             }
         	})
