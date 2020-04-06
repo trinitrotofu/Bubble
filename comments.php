@@ -155,6 +155,7 @@
 	}
 	function bindsubmit(){
 		$("#comment-form").submit(function() {
+			var pgid = start_progress()
 			$("#add-comment-button").attr("disabled",true)
 			var data = $(this).serializeArray()
 			var rubbish = <?php echo Typecho_Common::shuffleScriptVar(
@@ -166,6 +167,7 @@
             data: data,
             complete: function(){
             	$("#add-comment-button").attr("disabled",false)
+				stop_progress(pgid)
             },
             error: function() {
                 alert("网络请求错误","请重新尝试提交评论")
@@ -178,7 +180,7 @@
             	}else{
             		$("#comments").html(newdocument.getElementById("comments").innerHTML)
             		bindsubmit()
-					var authorName = $("#author").val()
+					var authorName = $("#author").val() ? $("#author").val() : $("a[href$='profile.php']").text()
 					if(authorName){
 						focusToComment(authorName)
 					}
