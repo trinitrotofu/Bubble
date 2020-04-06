@@ -17,12 +17,26 @@ function themeConfig($form) {
 	$form->addInput($footerWidget);
 	$Pjax = new Typecho_Widget_Helper_Form_Element_Radio('Pjax', array('0' => _t('关闭'), '1' => _t('打开')), '1', _t('开启全站 pjax 模式'), _t('选择是否启用全站 pjax 模式提升用户访问体验。注意：启用该项可能带来页面加载问题，请仔细阅读主题说明文档。'));
 	$form->addInput($Pjax);
+	$pjaxcomp = new Typecho_Widget_Helper_Form_Element_Textarea('pjaxcomp', NULL, '', _t('pjax 回调代码'), _t('在这里填入 pjax 渲染完毕后需执行的 JS 代码，具体使用方法请仔细阅读主题说明文档'));
+	$form->addInput($pjaxcomp);
 	$katex = new Typecho_Widget_Helper_Form_Element_Radio('katex', array('0' => _t('关闭'), '1' => _t('打开')), '0', _t('开启 katex 数学公式渲染'), _t('选择是否启用 katex 数学公式渲染'));
 	$form->addInput($katex);
 	$prismjs = new Typecho_Widget_Helper_Form_Element_Radio('prismjs', array('0' => _t('关闭'), '1' => _t('打开')), '0', _t('开启 prism.js 代码高亮'), _t('选择是否启用 prism.js 代码高亮'));
-	$form->addInput($katex);
-	$pjaxcomp = new Typecho_Widget_Helper_Form_Element_Textarea('pjaxcomp', NULL, '', _t('pjax 附加代码'), _t('在这里填入 pjax 渲染完毕后需执行的 JS 代码，具体使用方法请仔细阅读主题说明文档'));
-	$form->addInput($pjaxcomp);
+	$form->addInput($prismjs);
+	$prismLine = new Typecho_Widget_Helper_Form_Element_Radio('prismLine', array('0' => _t('关闭'), '1' => _t('打开')), '0', _t('开启 prism.js 行号显示'), _t('选择是否显示 prism.js 代码高亮左侧行号'));
+	$form->addInput($prismLine);
+	$prismTheme = new Typecho_Widget_Helper_Form_Element_Radio('prismTheme',
+		array('prism' => _t('default'),
+			'prism-coy' => _t('coy'),
+			'prism-dark' => _t('dark'),
+			'prism-funky' => _t('funky'),
+			'prism-okaidia' => _t('okaidia'),
+			'prism-solarizedlight' => _t('solarizedlight'),
+			'prism-tomorrow' => _t('tomorrow'),
+			'prism-twilight' => _t('twilight')
+		),
+	'prism', _t('prism.js 高亮主题'), _t('选择 prism.js 代码高亮的主题配色'));
+	$form->addInput($prismTheme);
 }
 
 function printCategory($that, $icon = 0) { ?>
@@ -125,7 +139,8 @@ function getRandomImage($str)
 	return $arr[rand(0, sizeof($arr) - 1)];
 }
 
-function clear_urlcan($url){
+function clear_urlcan($url)
+{
     $rstr='';
     $tmparr=parse_url($url);
     $rstr=empty($tmparr['scheme'])?'http://':$tmparr['scheme'].'://';

@@ -76,16 +76,29 @@
 			</div>
 		</div>
 	</footer>
-	</div>
+	<?php if($this->options->Pjax) _e('</div>'); ?>
 	<!-- Core -->
-	<script src="<?php $this->options->themeUrl("assets/vendor/popper/popper.min.js"); ?>"></script>
-	<script src="<?php $this->options->themeUrl("assets/vendor/bootstrap/bootstrap.min.js"); ?>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
 	<!-- Optional plugins -->
-	<?php if($this->options->Pjax=="1"): ?>
+	<script src="https://cdn.jsdelivr.net/npm/headroom.js@0.11.0/dist/headroom.min.js"></script>
+	<!-- Theme JS -->
+	<script src="<?php $this->options->themeUrl("assets/js/argon.min.js"); ?>"></script>
+	<script src="<?php $this->options->themeUrl("assets/js/bbrender.js"); ?>"></script>
+	<!-- Pjax -->
+	<?php if($this->options->Pjax): ?>
 	<script>
 		function init(){
 			<?php $this->options->pjaxcomp() ?>
-			<?php if($this->options->katex=="1"): ?>
+			<?php if($this->options->prismjs): ?>
+			var pres = document.querySelectorAll('pre');
+			var lineNumberClassName = 'line-numbers';
+			pres.forEach(function (item, index) {
+				item.className = item.className == '' ? lineNumberClassName : item.className + ' ' + lineNumberClassName;
+			});
+			Prism.highlightAll(false,null);
+			<?php endif; ?>
+			<?php if($this->options->katex): ?>
 			try{
 				renderMathInElement(document.body,{
 					delimiters: [
@@ -101,7 +114,7 @@
 			}catch{}
 		}
 	</script>
-	<script src="<?php $this->options->themeUrl("assets/js/jquery.pjax.js"); ?>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.js"></script>
 	<script src="<?php $this->options->themeUrl("assets/js/progress.js"); ?>"></script>
 	<script>
 		var pgid = 0
@@ -132,12 +145,8 @@
 	</script>
 	<div class="black-cover" style="display: none;"></div>
 	<?php endif; ?>
-	<script src="<?php $this->options->themeUrl("assets/vendor/headroom/headroom.min.js"); ?>"></script>
-	<!-- Theme JS -->
-	<script src="<?php $this->options->themeUrl("assets/js/argon.min.js"); ?>"></script>
-	<script src="<?php $this->options->themeUrl("assets/js/bbrender.js"); ?>"></script>
 	<!-- KaTeX JS -->
-	<?php if($this->options->katex=="1"): ?>
+	<?php if($this->options->katex): ?>
 	<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
 	<script>
@@ -149,7 +158,24 @@
 		});
 	</script>
 	<?php endif; ?>
-	
+	<!-- Prism JS -->
+	<?php if($this->options->prismjs): ?>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/components/prism-core.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/show-language/prism-show-language.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+	<script>
+		var pres = document.querySelectorAll('pre');
+		var lineNumberClassName = 'line-numbers';
+		pres.forEach(function (item, index) {
+			item.className = item.className == '' ? lineNumberClassName : item.className + ' ' + lineNumberClassName;
+		});
+	</script>
+		<?php if($this->options->prismLine): ?>
+		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+		<?php endif; ?>
+	<?php endif; ?>
 	<!-- Alert -->
 	<div class="modal fade show" id="modal-notification" style="z-index: 102;display: none;">
 		<div class="modal-dialog modal-primary modal-dialog-centered modal-" role="document">
@@ -183,7 +209,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<script>
 		function alert(main,detail){
 			$("#msgMain").html(main)
@@ -195,9 +220,7 @@
 			$("#modal-notification").show("normal");
 		}
 	</script>
-	
 	<!-- Typecho footer -->
 	<?php $this->footer(); ?>
-
 	</body>
 </html>

@@ -25,7 +25,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
 	<!-- FontAwesome -->
-	<link href="<?php $this->options->themeUrl("assets/vendor/font-awesome/css/font-awesome.min.css"); ?>" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- Main CSS -->
 	<link type="text/css" href="<?php $this->options->themeUrl("assets/css/main.min.css"); ?>" rel="stylesheet">
@@ -34,12 +34,21 @@
 	<link type="text/css" href="<?php $this->options->themeUrl("style.css"); ?>" rel="stylesheet">
 	
 	<!-- KaTeX CSS -->
-	<?php if($this->options->katex=="1"): ?>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+	<?php if ($this->options->katex): ?>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
 	<?php endif; ?>
-	
-	<!-- Jquery JS -->
-	<script src="<?php $this->options->themeUrl("assets/vendor/jquery/jquery.min.js"); ?>"></script>
+
+	<!-- PrismJS CSS -->
+	<?php if ($this->options->prismjs): ?>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/themes/<?php $this->options->prismTheme(); ?>.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/toolbar/prism-toolbar.css" />
+		<?php if ($this->options->prismLine): ?>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/line-numbers/prism-line-numbers.css" />
+		<?php endif; ?>
+	<?php endif; ?>
+
+	<!-- Jquery -->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 	
 	<!-- Typecho header -->
 	<?php $this->header(); ?>
@@ -100,4 +109,4 @@
 		</nav>
 	</header>
 	
-	<div id="pjax-container">
+	<?php if($this->options->Pjax) _e('<div id="pjax-container">'); ?>
