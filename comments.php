@@ -149,8 +149,18 @@
 	}
 
 	bindsubmit()
+	var rubbishScripts = new DOMParser().parseFromString(`<?php echo $this->pluginHandle()->header("", $this);?>`, "text/html").getElementsByTagName("script")
+	var script
+	for(var i = 0; i<rubbishScripts.length; i++){
+		script = rubbishScripts[i].innerHTML
+		try {
+			eval(script)
+		} catch (error) {
+			alert(error)
+		}
+	}
 </script>
-<?php echo $this->pluginHandle()->header("", $this);?>
+
 <script type="text/javascript">
     (function () {
     window.TypechoComment = {
