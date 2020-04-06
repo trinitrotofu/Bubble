@@ -112,10 +112,10 @@
     		timeout: 8000
 		}).on('pjax:send', function() {
 			pgid = start_progress()
-			$(".black_cover").fadeIn(400)
+			$(".black-cover").fadeIn(400)
 			$('html,body').animate({ scrollTop: $('html').offset().top}, 500)
 		}).on('pjax:complete', function() {
-			$(".black_cover").fadeOut(400)
+			$(".black-cover").fadeOut(400)
 			stop_progress(pgid)
 			init()
 			
@@ -130,16 +130,16 @@
 			return false
 		})
 	</script>
-	<div class="black_cover" style="display: none;"></div>
+	<div class="black-cover" style="display: none;"></div>
 	<?php endif; ?>
 	<script src="<?php $this->options->themeUrl("assets/vendor/headroom/headroom.min.js"); ?>"></script>
 	<!-- Theme JS -->
 	<script src="<?php $this->options->themeUrl("assets/js/argon.min.js"); ?>"></script>
-	<script src="<?php $this->options->themeUrl("assets/js/main.js"); ?>"></script>
+	<script src="<?php $this->options->themeUrl("assets/js/bbrender.js"); ?>"></script>
 	<!-- KaTeX JS -->
 	<?php if($this->options->katex=="1"): ?>
-	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
 	<script>
 		renderMathInElement(document.body,{
 			delimiters: [

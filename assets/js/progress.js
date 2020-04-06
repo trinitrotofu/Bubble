@@ -29,7 +29,7 @@ function stop_progress(clock){
 	}, 500);
 }
 
-addclass = "bg-success"
+addclass = "bg-gradient-primary"
 
 $("body").append("<style>#argprogress{position: fixed;top: 0;width: 100%;left: 0;border: none;z-index: 105;overflow: hidden;height: 5px;display: flex;background-color: #e9ecef;}</style>")
 $("body").append(`<div id="argprogress" style="display:none;"><div class="progress-bar ${addclass}" style="width:0%;border: none;"></div></div>`)

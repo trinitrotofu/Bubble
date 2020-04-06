@@ -35,7 +35,7 @@
 	
 	<!-- KaTeX CSS -->
 	<?php if($this->options->katex=="1"): ?>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
 	<?php endif; ?>
 	
 	<!-- Jquery JS -->
