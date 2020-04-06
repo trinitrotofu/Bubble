@@ -150,8 +150,10 @@
 		var commentId = Math.max(...commentIds)
 		if(commentId!=-Infinity){
 			$('html,body').animate({ scrollTop: $('#comment-'+commentId).offset().top-100}, 500)
-	    	$('#comment-'+commentId).fadeToggle(90);
-			$('#comment-'+commentId).fadeToggle(110);
+			setTimeout(() => {
+				$('#comment-'+commentId).fadeToggle(90);
+				$('#comment-'+commentId).fadeToggle(110);
+			}, 500);
 		}
 	}
 	function bindsubmit(){
