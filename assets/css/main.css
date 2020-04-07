@@ -18798,8 +18798,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 	display: flex;
 
-	width: 46px;
-	height: 46px;
+	width: 36px;
+	height: 36px;
 	margin: 0 3px;
 	padding: 0;
 
@@ -18807,6 +18807,13 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 	align-items: center;
 	justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .page-nav a {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .page-nav a:hover

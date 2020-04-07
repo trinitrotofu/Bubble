@@ -30,9 +30,6 @@
 	<!-- Main CSS -->
 	<link type="text/css" href="<?php $this->options->themeUrl("assets/css/main.min.css"); ?>" rel="stylesheet">
 
-	<!-- Custom CSS -->
-	<style type="text/css"><?php $this->options->customCss(); ?></style>
-	
 	<!-- KaTeX CSS -->
 	<?php if ($this->options->katex): ?>
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
@@ -49,7 +46,12 @@
 
 	<!-- Jquery -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-	
+
+	<!-- Custom CSS -->
+	<?php if ($this->options->customCss): ?>
+	<style type="text/css"><?php $this->options->customCss(); ?></style>
+	<?php endif; ?>
+
 	<!-- Typecho header -->
 	<?php $this->header(); ?>
 </head>

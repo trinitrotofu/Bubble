@@ -50,7 +50,7 @@
 			<?php $this->comments()->to($comments); ?>
 			<?php if ($comments->have()): ?>
 				<?php $comments->listComments(); ?>
-				<div class="row align-items-center"><nav class="page-nav"><?php $comments->pageNav('<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>', 2, '...', array('wrapTag' => 'ul', 'wrapClass' => 'pagination justify-content-center', 'currentClass' => 'active', 'prevClass' => '', 'nextClass' => '')); ?></nav></div>
+				<div class="row align-items-center justify-content-center"><nav class="page-nav"><?php $comments->pageNav('<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>', 1, '...', array('wrapTag' => 'ul', 'wrapClass' => 'pagination', 'textTag' => 'a', 'currentClass' => 'active', 'prevClass' => '', 'nextClass' => '')); ?></nav></div>
 			<?php endif; ?>
 			<div class="comment-card">
 				<?php if($this->allow('comment')): ?>

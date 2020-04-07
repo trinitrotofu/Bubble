@@ -92,7 +92,7 @@ function printToggleButton($that) {
 	if ($that->getTotal() > $that->parameter->pageSize) { ?>
 		<section class="section">
 			<div class="container">
-				<nav class="page-nav"><?php $that->pageNav('<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>', 2, '...', array('wrapTag' => 'ul', 'wrapClass' => 'pagination justify-content-center', 'currentClass' => 'active', 'prevClass' => '', 'nextClass' => '')); ?></nav>
+				<nav class="page-nav"><?php $that->pageNav('<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>', 1, '...', array('wrapTag' => 'ul', 'wrapClass' => 'pagination justify-content-center', 'textTag' => 'a', 'currentClass' => 'active', 'prevClass' => '', 'nextClass' => '')); ?></nav>
 			</div>
 		</section>
 	<?php }
