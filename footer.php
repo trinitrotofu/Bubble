@@ -177,46 +177,24 @@
 		<?php endif; ?>
 	<?php endif; ?>
 	<!-- Alert -->
-	<div class="modal fade show" id="modal-notification" style="z-index: 102;display: none;">
-		<div class="modal-dialog modal-primary modal-dialog-centered modal-" role="document">
-			<div class="modal-content bg-gradient-primary">
+	<div id="modal-notification" class="modal fade show" id="modal-notification" style="z-index: 102;display: none;">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
 				<div class="modal-header">
-					<h6 class="modal-title" id="modal-title-notification">
-						Info from <?php $this->options->title() ?>
-					</h6>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">
-							×
-						</span>
+					<h5 id="msgMain" class="modal-title" id="mySmallModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#modal-notification').hide('normal');">
+						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					<div class="py-3 text-center">
-						<i class="ni ni-bell-55 ni-3x">
-						</i>
-						<h4 id="msgMain" class="display-4 mt-4 text-white">
-							提示窗口
-						</h4>
-					</div>
-					<p id="msgDetail" class="py-3 text-center">
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-white" onclick="$('#modal-notification').hide('normal');">
-						知道了
-					</button>
-				</div>
+				<div id="msgDetail" class="modal-body"></div>
 			</div>
 		</div>
 	</div>
 	<script>
 		function alert(main,detail){
 			$("#msgMain").html(main)
-			if(detail){
-				$("#msgDetail").html(detail)
-			}else{
-				$("#msgDetail").html("")
-			}
+			if(detail) $("#msgDetail").html(detail)
+			else $("#msgDetail").html("")
 			$("#modal-notification").show("normal");
 		}
 	</script>

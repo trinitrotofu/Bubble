@@ -18719,6 +18719,11 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     margin: 10px auto;
 }
 
+.avatar {
+    max-width: 99999px !important;
+    max-height: 99999px !important;
+}
+
 .comment-list {
     list-style: none;
     padding: 0;
@@ -19015,7 +19020,7 @@ p {
     transform: rotate(360deg);
 }
 
-.black-cover{
+.black-cover {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -19023,4 +19028,47 @@ p {
 	height: 100%;
 	z-index: 100;
 	background-color: rgba(0,0,0,0.4);
+}
+
+.friend-card {
+    width: 48%;
+    margin: 15px 1%;
+    height: 100px;
+    display: block;
+}
+
+.friend-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.friend-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+
+.friend-container .avatar {
+    margin-right: 15px;
+    width: 60px;
+    height: 60px;
+}
+
+@media screen and (max-width: 768px) {
+    .friend-card {
+        width: 98%;
+    }
+}
+
+.friend-text {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #525f7f;
 }

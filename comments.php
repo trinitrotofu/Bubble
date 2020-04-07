@@ -62,7 +62,7 @@
 						<?php $comments->cancelReply(); ?>
 					</div>
 					<br/>
-					<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
+					<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form" style="overflow: auto; zoom: 1;">
 						<?php if($this->user->hasLogin()): ?>
 						<p><?php _e('已登录为'); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>。<a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('注销？'); ?></a></p>
 						<?php else: ?>
@@ -150,8 +150,10 @@
 		var commentId = Math.max(...commentIds)
 		if(commentId!=-Infinity){
 			$('html,body').animate({ scrollTop: $('#comment-'+commentId).offset().top-100}, 500)
-	    	$('#comment-'+commentId).fadeToggle(90);
-			$('#comment-'+commentId).fadeToggle(110);
+	    setTimeout(() => {
+				$('#comment-'+commentId).fadeToggle(90);
+				$('#comment-'+commentId).fadeToggle(110);
+			}, 500);
 		}
 	}
 	function bindsubmit(){

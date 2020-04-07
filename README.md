@@ -1,19 +1,12 @@
 # Bubble
 
-一块豆腐和一头进了信息学算法竞赛中国集训队的🐷写的 Typecho 极简风格响应式主题。
+Typecho 清新风格响应式主题。
 
 Demo:  [豆腐的 Blog](https://tntofu.com/)
 
 如果觉得本主题还不错的话可以给个 star 哦，我会很受用的 \_(:з」∠)\_
 
 ~~你看我既没收费也没提供打赏二维码，给个 star 再走嘛！~~
-
-PS:
-
-🐷~~由于有些特殊的需求所以~~在本主题代码上进行了部分修改，属于不同版本，你可以根据个人喜好选择
-
-+ Github reop: [https://github.com/totorato/Bubble](https://github.com/totorato/Bubble)
-+ Demo: [🐷的 Blog](http://www.whalemaid.xyz/)
 
 # 特性
 
@@ -54,6 +47,13 @@ Open sourced under the MIT license.
 
 + 基于[Argon Design System](https://www.creative-tim.com/product/argon-design-system)
 + 评论模块中部分代码参照了 Typecho 官方主题 Default
+
+PS:
+
+🐷~~由于有些特殊的需求所以~~在本主题代码上进行了部分修改，属于不同版本，你可以根据个人喜好选择
+
++ Github reop: [https://github.com/totorato/Bubble](https://github.com/totorato/Bubble)
++ Demo: [🐷的 Blog](http://www.whalemaid.xyz/)
 
 # Todo
 

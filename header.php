@@ -31,7 +31,7 @@
 	<link type="text/css" href="<?php $this->options->themeUrl("assets/css/main.min.css"); ?>" rel="stylesheet">
 
 	<!-- Custom CSS -->
-	<link type="text/css" href="<?php $this->options->themeUrl("style.css"); ?>" rel="stylesheet">
+	<style type="text/css"><?php $this->options->customCss(); ?></style>
 	
 	<!-- KaTeX CSS -->
 	<?php if ($this->options->katex): ?>
