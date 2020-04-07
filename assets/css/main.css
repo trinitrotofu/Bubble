@@ -18780,7 +18780,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     padding: 15px;
 }
 
-.comment-nav a {
+.page-nav a {
 	line-height: 1.25;
 
 	position: relative;
@@ -18798,8 +18798,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 	display: flex;
 
-	width: 36px;
-	height: 36px;
+	width: 46px;
+	height: 46px;
 	margin: 0 3px;
 	padding: 0;
 
@@ -18809,7 +18809,26 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 	justify-content: center;
 }
 
-.comment-nav .active a {
+.page-nav a:hover
+{
+    z-index: 2;
+
+    text-decoration: none;
+
+    color: #8898aa;
+    border-color: #dee2e6; 
+    background-color: #dee2e6;
+}
+
+.page-nav a:focus
+{
+    z-index: 2;
+
+    outline: 0;
+    box-shadow: none;
+}
+
+.page-nav .active a {
 	z-index: 1;
 
 	color: #fff;
@@ -19052,10 +19071,11 @@ p {
     display: flex;
 }
 
-.friend-container .avatar {
-    margin-right: 15px;
+.friend-avatar {
     width: 60px;
     height: 60px;
+    flex-shrink: 0;
+    margin-right: 10px;
 }
 
 @media screen and (max-width: 768px) {

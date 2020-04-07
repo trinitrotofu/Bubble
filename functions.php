@@ -15,7 +15,7 @@ function themeConfig($form) {
 	$form->addInput($footerText);
 	$footerWidget = new Typecho_Widget_Helper_Form_Element_Radio('footerWidget', array('0' => _t('不显示'), '1' => _t('显示')), '1', _t('页脚小工具'), _t('选择是否在页面底部显示“最新评论”、“最新文章”等栏目'));
 	$form->addInput($footerWidget);
-	$customCss = new Typecho_Widget_Helper_Form_Element_Text('customCss', NULL, '', _t('自定义 css'), _t('在这里填入所需要的 css，以实现自定义页面样式，如调整字体大小等'));
+	$customCss = new Typecho_Widget_Helper_Form_Element_Textarea('customCss', NULL, '', _t('自定义 css'), _t('在这里填入所需要的 css，以实现自定义页面样式，如调整字体大小等'));
 	$form->addInput($customCss);
 	$Pjax = new Typecho_Widget_Helper_Form_Element_Radio('Pjax', array('0' => _t('关闭'), '1' => _t('打开')), '1', _t('开启全站 pjax 模式'), _t('选择是否启用全站 pjax 模式提升用户访问体验。注意：启用该项可能带来页面加载问题，请仔细阅读主题说明文档。'));
 	$form->addInput($Pjax);
@@ -92,24 +92,7 @@ function printToggleButton($that) {
 	if ($that->getTotal() > $that->parameter->pageSize) { ?>
 		<section class="section">
 			<div class="container">
-				<div class="row justify-content-md-center">
-					<div class="col col-md-auto">
-						<?php $that->pageLink('
-							<button class="btn btn-icon btn-3 btn-outline-default" style="float: right;" type="button">
-								<span class="btn-inner--icon"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-								<span class="btn-inner--text">上一页</span>
-							</button>
-						'); ?>
-					</div>
-					<div class="col col-md-auto">
-						<?php $that->pageLink('
-							<button class="btn btn-icon btn-3 btn-outline-default" style="float: left;" type="button">
-								<span class="btn-inner--text">下一页</span>
-								<span class="btn-inner--icon"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-							</button>
-						','next'); ?>
-					</div>
-				</div>
+				<nav class="page-nav"><?php $that->pageNav('<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>', 2, '...', array('wrapTag' => 'ul', 'wrapClass' => 'pagination justify-content-center', 'currentClass' => 'active', 'prevClass' => '', 'nextClass' => '')); ?></nav>
 			</div>
 		</section>
 	<?php }

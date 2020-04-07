@@ -90,6 +90,7 @@
 	<script>
 		function init(){
 			<?php $this->options->pjaxcomp() ?>
+			
 			<?php if($this->options->prismjs): ?>
 			var pres = document.querySelectorAll('pre');
 			var lineNumberClassName = 'line-numbers';
@@ -109,6 +110,7 @@
 			}catch{}
 			<?php endif; ?>
 			parseBbcode()
+			parseBblink()
 			try{
 				window.onload()
 			}catch{}
