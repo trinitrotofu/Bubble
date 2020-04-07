@@ -18702,8 +18702,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 /* New CSS */
 
 .content {
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
 }
 
 @media screen and (max-width: 768px) {
@@ -18714,7 +18714,14 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 }
 
 .content img {
-	max-width: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 10px auto;
+}
+
+.avatar {
+    max-width: 99999px !important;
+    max-height: 99999px !important;
 }
 
 .comment-list {
@@ -18773,7 +18780,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     padding: 15px;
 }
 
-.comment-nav a {
+.page-nav a {
 	line-height: 1.25;
 
 	position: relative;
@@ -18802,7 +18809,33 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 	justify-content: center;
 }
 
-.comment-nav .active a {
+@media screen and (max-width: 768px) {
+    .page-nav a {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.page-nav a:hover
+{
+    z-index: 2;
+
+    text-decoration: none;
+
+    color: #8898aa;
+    border-color: #dee2e6; 
+    background-color: #dee2e6;
+}
+
+.page-nav a:focus
+{
+    z-index: 2;
+
+    outline: 0;
+    box-shadow: none;
+}
+
+.page-nav .active a {
 	z-index: 1;
 
 	color: #fff;
@@ -18869,6 +18902,9 @@ table {
         margin-right: 0 !important;
         margin-bottom: 0 !important;
         border-radius: 0 !important;
+    }
+    .content-card-head {
+        margin-top: 0px;
     }
 }
 
@@ -19008,4 +19044,58 @@ p {
 
 .index-avatar:hover {
     transform: rotate(360deg);
+}
+
+.black-cover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background-color: rgba(0,0,0,0.4);
+}
+
+.friend-card {
+    width: 48%;
+    margin: 15px 1%;
+    height: 100px;
+    display: block;
+}
+
+.friend-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.friend-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+
+.friend-avatar {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .friend-card {
+        width: 98%;
+    }
+}
+
+.friend-text {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #525f7f;
 }

@@ -3,8 +3,8 @@
  * Typecho 极简风格响应式主题
  * 
  * @package Bubble
- * @author TriNitroTofu and Boshi
- * @version 2.3.0
+ * @author TriNitroTofu, Rorical, Boshi
+ * @version 3.0.0
  * @link https://github.com/trinitrotofu/Bubble
  */
 
