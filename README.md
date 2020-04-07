@@ -25,7 +25,7 @@ Demo:  [https://tntofu.com/](https://tntofu.com/)
 # 使用
 ## 安装
 
-在[Releases](https://github.com/trinitrotofu/Bubble/releases)下载 zip 源码，解压后移动到 Typecho 主题目录。
+直接下载 zip 源码，解压后修改文件夹名称，移动到 Typecho 主题目录，也可以直接在服务器上用 git clone 下载主题。
 
 ## 设置
 
