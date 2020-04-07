@@ -150,7 +150,7 @@
 		var commentId = Math.max(...commentIds)
 		if(commentId!=-Infinity){
 			$('html,body').animate({ scrollTop: $('#comment-'+commentId).offset().top-100}, 500)
-	    setTimeout(() => {
+			setTimeout(() => {
 				$('#comment-'+commentId).fadeToggle(90);
 				$('#comment-'+commentId).fadeToggle(110);
 			}, 500);
