@@ -193,6 +193,11 @@ Open sourced under the MIT license.
 暂无
 
 # 更新历史
+## 3.0.1
+
++ 修复评论卡托条问题
++ 修复左上角标题颜色问题
+
 ## 3.0.0
 
 + 新增 pjax 支持、ajax 评论无刷新及其部分细节优化
