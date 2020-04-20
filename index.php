@@ -4,7 +4,7 @@
  * 
  * @package Bubble
  * @author TriNitroTofu, Rorical, Boshi
- * @version 3.0.1
+ * @version 3.0.2
  * @link https://github.com/trinitrotofu/Bubble
  */
 
@@ -13,7 +13,7 @@
 ?>
 
 	<main>
-		<section class="section section-lg section-hero section-shaped">
+		<section class="section section-lg section-hero section-shaped" style="height: 100vh;">
 			<?php printBackground($this->options->indexImage, $this->options->bubbleShow); ?>
 			<div class="container shape-container d-flex align-items-center py-lg">
 				<div class="col px-0">
@@ -44,5 +44,5 @@
 			<!-- Toggle page -->
 			<?php printToggleButton($this); ?>
 		</div>
-
+		<?php if($this->_currentPage>1) echo("<script>$('html,body').animate({ scrollTop: $('.card.shadow.content-card.list-card.content-card-head').offset().top}, 500)</script>") ?>
 <?php $this->need('footer.php'); ?>
