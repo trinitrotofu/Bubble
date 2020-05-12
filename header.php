@@ -91,17 +91,13 @@
 								<a class="nav-link" href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
 							</li>
 						<?php endwhile; ?>
-						<li class="nav-item" style="margin-left:1rem;">
+						<li class="navbar_search_container">
 							<form method="post" action="" id="search">
-								<div class="row">
-									<div class="input-group">
-										<input type="text" name="s" class="form-control" placeholder="Search" type="text">
-										<div class="input-group-append">
-											<button type="submit" class="btn btn-icon btn-2 btn-primary" style="box-shadow: none;" type="button">
-												<span class="btn-inner--icon"><i class="fa fa-search" aria-hidden="true"></i></span>
-											</button>
-										</div>
+								<div class="input-group input-group-alternative">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fa fa-search"></i></span>
 									</div>
+									<input type="text" name="s" class="form-control" placeholder="搜点什么……" type="text" autocomplete="off">
 								</div>
 							</form>
 						</li>
