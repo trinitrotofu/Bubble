@@ -9,7 +9,7 @@
     	<a class="carousel-control-prev" id="toc-nomiao">
               <span class="ni ni-bold-left" id="toc-miao"></span>
             </a>
-        	<div class="card-img tu container container-lg py-5 toc">
+        	<div class="card-img container container-lg py-5 toc">
         		<strong>文章目录</strong>
         		<div class="toc-list">
         		<? getCatalog(); ?>

@@ -138,3 +138,54 @@ function clear_urlcan($url)
     $rstr.=$tmparr['host'].$tmparr['path'];
     return $rstr;
 }
+
+function createCatalog($obj) {
+    global $catalog;
+    global $catalog_count;
+    $catalog = array();
+    $catalog_count = 0;
+    $obj = preg_replace_callback('/<h([1-6])(.*?)>(.*?)<\/h\1>/i', function($obj) {
+        global $catalog;
+        global $catalog_count;
+        $catalog_count ++;
+        $catalog[] = array('text' => trim(strip_tags($obj[3])), 'depth' => $obj[1], 'count' => $catalog_count);
+        return '<h'.$obj[1].$obj[2].'><a name="cl-'.$catalog_count.'"></a>'.$obj[3].'</h'.$obj[1].'>';
+    }, $obj);
+    return $obj;
+}
+
+function getCatalog() {
+    global $catalog;
+    $index = '';
+    if ($catalog) {
+        $index = '<ul>'."\n";
+        $prev_depth = '';
+        $to_depth = 0;
+        foreach($catalog as $catalog_item) {
+            $catalog_depth = $catalog_item['depth'];
+            if ($prev_depth) {
+                if ($catalog_depth == $prev_depth) {
+                    $index .= '</li>'."\n";
+                } elseif ($catalog_depth > $prev_depth) {
+                    $to_depth++;
+                    $index .= '<ul>'."\n";
+                } else {
+                    $to_depth2 = ($to_depth > ($prev_depth - $catalog_depth)) ? ($prev_depth - $catalog_depth) : $to_depth;
+                    if ($to_depth2) {
+                        for ($i=0; $i<$to_depth2; $i++) {
+                            $index .= '</li>'."\n".'</ul>'."\n";
+                            $to_depth--;
+                        }
+                    }
+                    $index .= '</li>';
+                }
+            }
+            $index .= '<li><a href="javascript:jumpto('.$catalog_item['count'].')">'.$catalog_item['text'].'</a>';
+            $prev_depth = $catalog_item['depth'];
+        }
+        for ($i=0; $i<=$to_depth; $i++) {
+            $index .= '</li>'."\n".'</ul>'."\n";
+        }
+    }
+    echo $index;
+}
