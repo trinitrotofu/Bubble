@@ -39,6 +39,12 @@ function themeConfig($form) {
 		),
 	'prism', _t('prism.js 高亮主题'), _t('选择 prism.js 代码高亮的主题配色'));
 	$form->addInput($prismTheme);
+	$toc = new Typecho_Widget_Helper_Form_Element_Radio('toc',
+        array('able' => _t('开启'),
+            'disable' => _t('关闭'),
+        ),
+        'disable', _t('文章侧边的TOC默认打开状态'), _t('默认为关闭'));
+    $form->addInput($toc);
 }
 
 function printCategory($that, $icon = 0) { ?>
