@@ -5,39 +5,42 @@
 
 	<main>
 
-	<div class="card shadow border-0 bg-secondary toc-container">
-    	<a class="carousel-control-prev" id="toc-nomiao">
-              <span class="ni ni-bold-left" id="toc-miao"></span>
-            </a>
-        	<div class="card-img container container-lg py-5 toc">
-        		<strong>文章目录</strong>
-        		<div class="toc-list">
-        		<? getCatalog(); ?>
-        		</div>
-        </div>
-    </div>
-    <script>
-    	var onshow = false;
-    	function tocshow(){
-    		if(onshow){
-    			$(".toc-container").css("right",'-175px')
-    			$("#toc-miao").removeClass("ni-bold-right").addClass("ni-bold-left")
-    		}else{
-    			$(".toc-container").css("right",'-5px')
-    			$("#toc-miao").removeClass("ni-bold-left").addClass("ni-bold-right")
-    		}
-    		onshow = !onshow
-    	}
-    	function jumpto(num){
-    		$('html,body').animate({ scrollTop: $('[name="cl-'+num+'"]').offset().top-100 }, 500)
-    	}
-    	$("#toc-nomiao").click(tocshow)
-    	<?php if($this->options->toc=="able"): ?>
-    	$(document).ready(function() {     
-			tocshow()
-		}); 
-    	<?php endif; ?>
-    </script>
+		<?php if($this->options->toc): ?>
+		<div class="card shadow border-0 bg-secondary toc-container">
+			<a class="carousel-control-prev" id="toc-nomiao">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			</a>
+			<div class="card-img container container-lg py-5 toc">
+				<strong>文章目录</strong>
+				<div class="toc-list">
+					<?php getCatalog(); ?>
+				</div>
+			</div>
+		</div>
+		<script>
+			var onshow = false;
+			function tocshow(){
+				if(onshow){
+					$(".toc-container").css("right",'-172px')
+					$(".toc-container i").removeClass("fa-chevron-right").addClass("fa-chevron-left")
+				}else{
+					$(".toc-container").css("right",'-5px')
+					$(".toc-container i").removeClass("fa-chevron-left").addClass("fa-chevron-right")
+				}
+				onshow = !onshow
+			}
+			function jumpto(num){
+				$('html,body').animate({ scrollTop: $('[name="cl-'+num+'"]').offset().top-100 }, 500)
+			}
+			$("#toc-nomiao").click(tocshow)
+			<?php if($this->options->toc_enable): ?>
+			$(document).ready(function() {     
+				tocshow()
+			}); 
+			<?php endif; ?>
+		</script>
+		<?php endif; ?>
+
 		<section class="section section-lg section-hero section-shaped">
 			<?php printBackground(getRandomImage($this->options->randomImage), $this->options->bubbleShow); ?>
 			<div class="container shape-container d-flex align-items-center py-lg">

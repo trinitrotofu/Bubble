@@ -40,11 +40,17 @@ function themeConfig($form) {
 	'prism', _t('prism.js 高亮主题'), _t('选择 prism.js 代码高亮的主题配色'));
 	$form->addInput($prismTheme);
 	$toc = new Typecho_Widget_Helper_Form_Element_Radio('toc',
-        array('able' => _t('开启'),
-            'disable' => _t('关闭'),
-        ),
-        'disable', _t('文章侧边的TOC默认打开状态'), _t('默认为关闭'));
-    $form->addInput($toc);
+		array('0' => _t('关闭'),
+			'1' => _t('打开'),
+		),
+		'1', _t('开启 TOC 文章目录功能'), _t('选择是否开启 TOC 文章目录功能'));
+	$form->addInput($toc);
+	$toc_enable = new Typecho_Widget_Helper_Form_Element_Radio('toc_enable',
+		array('0' => _t('关闭'),
+			'1' => _t('展开'),
+		),
+		'0', _t('默认 TOC 目录展开状态'), _t('选择打开文章时 TOC 目录的展开状态'));
+	$form->addInput($toc_enable);
 }
 
 function printCategory($that, $icon = 0) { ?>
@@ -132,60 +138,66 @@ function getRandomImage($str)
 
 function clear_urlcan($url)
 {
-    $rstr='';
-    $tmparr=parse_url($url);
-    $rstr=empty($tmparr['scheme'])?'http://':$tmparr['scheme'].'://';
-    $rstr.=$tmparr['host'].$tmparr['path'];
-    return $rstr;
+	$rstr='';
+	$tmparr=parse_url($url);
+	$rstr=empty($tmparr['scheme'])?'http://':$tmparr['scheme'].'://';
+	$rstr.=$tmparr['host'].$tmparr['path'];
+	return $rstr;
 }
 
 function createCatalog($obj) {
-    global $catalog;
-    global $catalog_count;
-    $catalog = array();
-    $catalog_count = 0;
-    $obj = preg_replace_callback('/<h([1-6])(.*?)>(.*?)<\/h\1>/i', function($obj) {
-        global $catalog;
-        global $catalog_count;
-        $catalog_count ++;
-        $catalog[] = array('text' => trim(strip_tags($obj[3])), 'depth' => $obj[1], 'count' => $catalog_count);
-        return '<h'.$obj[1].$obj[2].'><a name="cl-'.$catalog_count.'"></a>'.$obj[3].'</h'.$obj[1].'>';
-    }, $obj);
-    return $obj;
+	global $catalog;
+	global $catalog_count;
+	$catalog = array();
+	$catalog_count = 0;
+	$obj = preg_replace_callback('/<h([1-6])(.*?)>(.*?)<\/h\1>/i', function($obj) {
+		global $catalog;
+		global $catalog_count;
+		$catalog_count ++;
+		$catalog[] = array('text' => trim(strip_tags($obj[3])), 'depth' => $obj[1], 'count' => $catalog_count);
+		return '<h'.$obj[1].$obj[2].'><a name="cl-'.$catalog_count.'"></a>'.$obj[3].'</h'.$obj[1].'>';
+	}, $obj);
+	return $obj;
 }
 
 function getCatalog() {
-    global $catalog;
-    $index = '';
-    if ($catalog) {
-        $index = '<ul>'."\n";
-        $prev_depth = '';
-        $to_depth = 0;
-        foreach($catalog as $catalog_item) {
-            $catalog_depth = $catalog_item['depth'];
-            if ($prev_depth) {
-                if ($catalog_depth == $prev_depth) {
-                    $index .= '</li>'."\n";
-                } elseif ($catalog_depth > $prev_depth) {
-                    $to_depth++;
-                    $index .= '<ul>'."\n";
-                } else {
-                    $to_depth2 = ($to_depth > ($prev_depth - $catalog_depth)) ? ($prev_depth - $catalog_depth) : $to_depth;
-                    if ($to_depth2) {
-                        for ($i=0; $i<$to_depth2; $i++) {
-                            $index .= '</li>'."\n".'</ul>'."\n";
-                            $to_depth--;
-                        }
-                    }
-                    $index .= '</li>';
-                }
-            }
-            $index .= '<li><a href="javascript:jumpto('.$catalog_item['count'].')">'.$catalog_item['text'].'</a>';
-            $prev_depth = $catalog_item['depth'];
-        }
-        for ($i=0; $i<=$to_depth; $i++) {
-            $index .= '</li>'."\n".'</ul>'."\n";
-        }
-    }
-    echo $index;
+	global $catalog;
+	$index = '';
+	if ($catalog) {
+		$index = '<ul>'."\n";
+		$prev_depth = '';
+		$to_depth = 0;
+		foreach($catalog as $catalog_item) {
+			$catalog_depth = $catalog_item['depth'];
+			if ($prev_depth) {
+				if ($catalog_depth == $prev_depth) {
+					$index .= '</li>'."\n";
+				} elseif ($catalog_depth > $prev_depth) {
+					$to_depth++;
+					$index .= '<ul>'."\n";
+				} else {
+					$to_depth2 = ($to_depth > ($prev_depth - $catalog_depth)) ? ($prev_depth - $catalog_depth) : $to_depth;
+					if ($to_depth2) {
+						for ($i=0; $i<$to_depth2; $i++) {
+							$index .= '</li>'."\n".'</ul>'."\n";
+							$to_depth--;
+						}
+					}
+					$index .= '</li>';
+				}
+			}
+			$index .= '<li><a href="javascript:jumpto('.$catalog_item['count'].')">'.$catalog_item['text'].'</a>';
+			$prev_depth = $catalog_item['depth'];
+		}
+		for ($i=0; $i<=$to_depth; $i++) {
+			$index .= '</li>'."\n".'</ul>'."\n";
+		}
+	}
+	echo $index;
+}
+
+function themeInit($archive) {
+	if ($archive->is('single')) {
+		$archive->content = createCatalog($archive->content);
+	}
 }
