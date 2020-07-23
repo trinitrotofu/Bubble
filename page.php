@@ -15,16 +15,24 @@
 				</div>
 			</div>
 		</section>
-		<div class="card shadow content-card content-card-head">
-			<!-- Page content -->
-			<section class="section">
-				<div class="container">
-					<div class="content">
-						<?php $this->content(); ?>
-					</div>
+		<section class="section section-components bg-secondary content-card-container">
+			<div class="container container-lg py-5 align-items-center content-card-container">
+				<div class="card shadow content-card content-card-head">
+					<!-- Page content -->
+					<section class="section">
+						<div class="container">
+							<div class="content">
+								<?php $this->content(); ?>
+							</div>
+						</div>
+					</section>
 				</div>
-			</section>
-			<!-- Comment -->
-			<?php if (!$this->hidden && $this->allow('comment')) $this->need('comments.php'); ?>
-		</div>
+				<!-- Comment -->
+				<?php if (!$this->hidden && $this->allow('comment')): ?>
+				<div class="card shadow content-card">
+					<?php $this->need('comments.php'); ?>
+				</div>
+				<?php endif; ?>
+			</div>
+		</section>
 <?php $this->need('footer.php'); ?>

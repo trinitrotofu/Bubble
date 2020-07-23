@@ -18778,7 +18778,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 }
 
 .page-nav a {
-    line-height: 1.25;
+    line-height: 46px;
 
     position: relative;
 
@@ -18795,8 +18795,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
     display: flex;
 
-    width: 36px;
-    height: 36px;
+    width: 46px;
+    height: 46px;
     margin: 0 3px;
     padding: 0;
 
@@ -18808,8 +18808,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 @media screen and (max-width: 768px) {
     .page-nav a {
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
     }
 }
 
@@ -18839,7 +18839,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     border-color: #5e72e4; 
     background-color: #5e72e4;
 
-    box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
 }
 
 table>tbody>tr>th, table>tfoot>tr>th, table>thead>tr>td, table>tbody>tr>td, table>tfoot>tr>td {
@@ -18902,13 +18902,13 @@ table {
 }
 
 .content-card {
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 30px;
+    margin-top: 8rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .content-card-head {
-    margin-top: -60px;
+    margin-top: -9rem;
 }
 
 .list-card {
@@ -18918,20 +18918,19 @@ table {
 
 @media screen and (max-width: 768px) {
     .content-card {
+        margin-top: 0 !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        margin-bottom: 0 !important;
+        border: 0 !important;
         border-radius: 0 !important;
+        box-shadow: none !important;
     }
     .content-card-head {
         margin-top: 0px;
     }
-}
-
-@media screen and (min-width: 1600px) {
-    .content-card {
-        margin-left: 100px;
-        margin-right: 100px;
+    .content-card-container {
+        padding: 0!important;
+        max-width: 99999px!important;
     }
 }
 
@@ -19129,7 +19128,7 @@ p {
 
 .toc-container {
     position:fixed;
-    right: -172px;
+    right: -175px;
     width: 200px;
     z-index: 100;
     bottom: calc(50vh - 150px);
@@ -19143,7 +19142,7 @@ p {
     padding-left: 23px;
 }
 
-.toc ul, li {
+.toc ul, .toc li {
     padding-left: 5px;
     list-style-type: none;
     padding-top: 2px;
