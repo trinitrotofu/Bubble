@@ -22,25 +22,30 @@
 				</div>
 			</div>
 		</section>
-		<div class="card shadow content-card list-card content-card-head">
-			<!-- Article list -->
-			<?php if ($this->have()): ?>
-				<?php while($this->next()): ?>
-					<?php printAricle($this); ?>
-				<?php endwhile; ?>
-				<!-- Toggle page -->
-				<?php printToggleButton($this); ?>
-			<?php else: ?>
-			<section class="section">
-				<div class="container">
-					<div class="content">
-						<h1>这里空空如也</h1>
-						<hr/>
-						<p>不如换个地方看看吧？</p>
+		<section class="section section-components bg-secondary content-card-container">
+			<div class="container container-lg py-5 align-items-center content-card-container">
+				<!-- Article list -->
+				<?php if ($this->have()): ?>
+					<?php $first_flag = true; ?>
+					<?php while($this->next()): ?>
+						<?php printAricle($this, $first_flag); $first_flag = false; ?>
+					<?php endwhile; ?>
+					<!-- Toggle page -->
+					<?php printToggleButton($this); ?>
+				<?php else: ?>
+					<div class="card shadow content-card list-card content-card-head">
+						<section class="section">
+							<div class="container">
+								<div class="content">
+								<h1>这里空空如也</h1>
+								<hr/>
+								<p>不如换个地方看看吧？</p>
+								</div>
+							</div>
+						</section>
 					</div>
-				</div>
+				<?php endif; ?>
 			</div>
-			<?php endif; ?> 
-		</div>
+		</section>
 
 <?php $this->need('footer.php'); ?>

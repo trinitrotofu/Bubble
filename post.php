@@ -21,7 +21,7 @@
 			var onshow = false;
 			function tocshow(){
 				if(onshow){
-					$(".toc-container").css("right",'-172px')
+					$(".toc-container").css("right",'-175px')
 					$(".toc-container i").removeClass("fa-chevron-right").addClass("fa-chevron-left")
 				}else{
 					$(".toc-container").css("right",'-5px')
@@ -54,23 +54,29 @@
 				</div>
 			</div>
 		</section>
-		<div class="card shadow content-card content-card-head">
-			<!-- Article content -->
-			<section class="section">
-				<div class="container">
-					<div class="content">
-						<?php $this->content(); ?>
-						<?php if (!$this->hidden) { ?>
-						<hr/>
-						<ul>
-							<li>分类：<?php printCategory($this); ?></li>
-							<li>标签：<?php printTag($this); ?></li>
-						</ul>
-						<?php } ?>
-					</div>
+		<section class="section section-components bg-secondary content-card-container">
+			<div class="container container-lg py-5 align-items-center content-card-container">
+				<div class="card shadow content-card content-card-head">
+					<!-- Article content -->
+					<section class="section">
+						<div class="container">
+							<div class="content">
+								<?php $this->content(); ?>
+								<?php if (!$this->hidden) { ?>
+								<hr/>
+								<ul>
+									<li>分类：<?php printCategory($this); ?></li>
+									<li>标签：<?php printTag($this); ?></li>
+								</ul>
+								<?php } ?>
+							</div>
+						</div>
+					</section>
 				</div>
-			</section>
-			<!-- Comment -->
-			<?php if (!$this->hidden && $this->allow('comment')) $this->need('comments.php'); ?>
-		</div>
+				<div class="card shadow content-card">
+					<!-- Comment -->
+					<?php if (!$this->hidden && $this->allow('comment')) $this->need('comments.php'); ?>
+				</div>
+			</div>
+		</section>
 <?php $this->need('footer.php'); ?>
