@@ -51,7 +51,8 @@
 	<?php if ($this->options->customCss): ?>
 	<style type="text/css"><?php $this->options->customCss(); ?></style>
 	<?php endif; ?>
-
+	<!-- Viewer.js JqPlugin -->
+	<script src="https://cdn.jsdelivr.net/gh/fengyuanchen/jquery-viewer@master/dist/jquery-viewer.min.js"></script>
 	<!-- Typecho header -->
 	<?php $this->header(); ?>
 </head>
