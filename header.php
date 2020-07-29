@@ -44,6 +44,9 @@
 		<?php endif; ?>
 	<?php endif; ?>
 
+	<!-- Viewer CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.css" />
+	
 	<!-- Jquery -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 
@@ -51,7 +54,8 @@
 	<?php if ($this->options->customCss): ?>
 	<style type="text/css"><?php $this->options->customCss(); ?></style>
 	<?php endif; ?>
-	<!-- Viewer.js JqPlugin -->
+	<!-- Viewer.js Plugin -->
+	<script src="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/fengyuanchen/jquery-viewer@master/dist/jquery-viewer.min.js"></script>
 	<!-- Typecho header -->
 	<?php $this->header(); ?>
