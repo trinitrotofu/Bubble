@@ -88,7 +88,7 @@
 	<!-- Pjax -->
 	<?php if($this->options->Pjax): ?>
 	<script>
-		$('img[src]:not(img[no-viewer])').viewer({
+		$('.content').viewer({
 			url: 'src'
 		})
 		function init(){
@@ -118,14 +118,14 @@
 				window.onload()
 			}catch{}
 			setTimeout(() => {
-				$('img[src]:not(img[no-viewer])').viewer({
+				$('.content').viewer({
 					url: 'src'
 				})
 			},300)
 		}
 		function destroy(){
 			// viewerjs
-			var viewer = $('img[src]:not(img[no-viewer])').data('viewer');
+			var viewer = $('.content').data('viewer');
 			if(viewer){
 				viewer.destroy()
 			}
