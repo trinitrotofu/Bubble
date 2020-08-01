@@ -88,6 +88,9 @@
 	<!-- Pjax -->
 	<?php if($this->options->Pjax): ?>
 	<script>
+		$('.content').viewer({
+			url: 'src'
+		})
 		function init(){
 			<?php $this->options->pjaxcomp() ?>
 			
@@ -114,6 +117,18 @@
 			try{
 				window.onload()
 			}catch{}
+			setTimeout(() => {
+				$('.content').viewer({
+					url: 'src'
+				})
+			},300)
+		}
+		function destroy(){
+			// viewerjs
+			var viewer = $('.content').data('viewer');
+			if(viewer){
+				viewer.destroy()
+			}
 		}
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.js"></script>
@@ -129,6 +144,8 @@
 			pgid = start_progress()
 			$(".black-cover").fadeIn(400)
 			$('html,body').animate({ scrollTop: $('html').offset().top}, 500)
+
+			destroy()
 		}).on('pjax:complete', function() {
 			$(".black-cover").fadeOut(400)
 			stop_progress(pgid)

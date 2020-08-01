@@ -163,9 +163,11 @@ try{
 			    $("#update-dec").html("")
 			    
 				$("#update-btn").html("最新版本号为"+releaseVersion+",当前版本为"+version+","+(toNum(releaseVersion)>toNum(version)?"您已经落后啦！点击更新！":"是最新哟！"));
-				$("#update-btn").click(function(){
-				    window.location.href="Themeupdater.php"
-				});
+				if(toNum(releaseVersion)>toNum(version)){
+					$("#update-btn").click(function(){
+					    window.location.href="Themeupdater.php"
+					});
+				}
 			},
 			error:function(){
 				$("#update-dec").html("我出错了QAQ...求原谅")
