@@ -106,9 +106,7 @@ try{
     
     echo "更新成功了喵!一切安好!";
     echo \'<meta http-equiv="refresh" content="3;url=themes.php">\';
-    if (file_exists("Themeupdater.php")) {  
-        @unlink ($file);  
-    }
+    @unlink ("Themeupdater.php");  
 }catch(Exception $e){
     echo "失败啦！请查看错误信息或者手动安装<br>";
     echo $e;
