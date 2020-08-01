@@ -2,80 +2,141 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 function themeConfig($form) {
 	Typecho_Widget::widget('Widget_Themes_List')->to($themes);
-	foreach ($themes -> stack as $key => $value){
-		if($value["activated"]==1){
-			break;
-		}
-	}
-	
-	if(!file_exists("Themeupdater.php")){
-		$updater = fopen("Themeupdater.php", "w");
-		$txt = '
-		<html>
-			<head>
-				<title>
-					Updater
-				</title>
-				<meta charset="UTF-8">
-				<style>
-					html { padding: 50px 10px; font-size: 16px; line-height: 1.4; color: #666;
-					background: #F6F6F3; -webkit-text-size-adjust: 100%; -ms-text-size-adjust:
-					100%; } html, input { font-family: "Helvetica Neue", Helvetica, Arial,
-					sans-serif; } body { max-width: 500px; max-height: 30px; padding: 30px
-					20px; margin: 0 auto; background: #FFF; } ul { padding: 0 0 0 40px; } .container
-					{ max-width: 380px; _width: 380px; margin: 0 auto; }
-				</style>
-			</head>
-			<body>
-				<div class="container">
-					<?php function getJsonRequest($url){ $ch=c url_init(); curl_setopt($ch,
-					CURLOPT_URL, $url); curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); curl_setopt($ch,
-					CURLOPT_SSL_VERIFYHOST, FALSE); curl_setopt($ch, CURLOPT_RETURNTRANSFER,
-					1); $output=c url_exec($ch); curl_close($ch); $output=j son_decode($output,true);
-					return $output; } function deldir($dir) { $dh=opendir($dir); while ($file=readdir($dh))
-					{ if($file!="." && $file!=".." ) { $fullpath=$dir. "/".$file; if(!is_dir($fullpath))
-					{ unlink($fullpath); } else { deldir($fullpath); } } } closedir($dh); if(rmdir($dir))
-					{ return true; } else { return false; } } function getRequest($url){ $ch=c
-					url_init(); curl_setopt($ch, CURLOPT_URL, $url); curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,
-					FALSE); curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); curl_setopt($ch,
-					CURLOPT_RETURNTRANSFER, 1); $output=c url_exec($ch); curl_close($ch); return
-					$output; } $dir="../usr/themes/Bubble" ; try{ $version=g etJsonRequest(
-					"https://data.jsdelivr.com/v1/package/resolve/gh/trinitrotofu/Bubble")[ "version"]; $files=g etJsonRequest(
-					"https://data.jsdelivr.com/v1/package/gh/trinitrotofu/Bubble@" . $version . "/flat")[ "files"]; if(file_exists($dir)) deldir($dir);
-					foreach ($files as $key=>
-						$value){ $filecontent = getRequest("https://cdn.jsdelivr.net/gh/trinitrotofu/Bubble@"
-						. $version . "/" .$value["name"]); if (!file_exists(dirname($dir.$value["name"]))){
-						mkdir(dirname($dir.$value["name"]),0755,true); } $fileobj = fopen($dir.$value["name"],
-						"w"); fwrite($fileobj, $filecontent); fclose($fileobj); } echo "主题更新成功！即将返回主题页面。";
-						echo \'
-						<meta http-equiv="refresh" content="3;url=themes.php">
-						\'; if (file_exists("Themeupdater.php")) { @unlink ($file); } }catch(Exception
-						$e){ echo "更新失败！请查看错误信息或者手动更新。
-						<br>
-						"; echo $e; } ?>
-				</div>
-			</body>
-		</html>';
-		fwrite($updater, $txt);
-		fclose($updater);
-	}
-	
-	echo '<script>
-		var version = "' . $value["version"] . '"
-		function toNum(a){
-			var a=a.toString();
-			var c=a.split('.');
-			var num_place=["","0","00","000","0000"],r=num_place.reverse();
-			for (var i=0;i<c.length;i++){
-			var len=c[i].length;
-				c[i]=r[len]+c[i];
-			}
-			var res = c.join("");
-			return res;
-		}
-	</script>';
-	
-	echo '
+    foreach ($themes -> stack as $key => $value){
+        if($value["activated"]==1){
+            break;
+        }
+    }
+    
+    if(!file_exists("Themeupdater.php")){
+        $updater = fopen("Themeupdater.php", "w");
+        $txt = '<html>
+    <head>
+        <title>Updater</title>
+        <meta charset="UTF-8">
+        <style>
+            html {
+                padding: 50px 10px;
+                font-size: 16px;
+                line-height: 1.4;
+                color: #666;
+                background: #F6F6F3;
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+
+            html,
+            input { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+            body {
+                max-width: 500px;
+                _width: 500px;
+                padding: 30px 20px;
+                margin: 0 auto;
+                background: #FFF;
+            }
+            ul {
+                padding: 0 0 0 40px;
+            }
+            .container {
+                max-width: 380px;
+                _width: 380px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+<?php
+function getJsonRequest($url){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($ch);
+    curl_close($ch);
+    $output = json_decode($output,true);
+    return $output;
+}
+function deldir($dir) {
+    $dh=opendir($dir);
+    while ($file=readdir($dh)) {
+        if($file!="." && $file!="..") {
+            $fullpath=$dir."/".$file;
+            if(!is_dir($fullpath)) {
+                unlink($fullpath);
+            } else {
+                deldir($fullpath);
+            }
+        }
+    }
+    closedir($dh);
+    if(rmdir($dir)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function getRequest($url){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($ch);
+    curl_close($ch);
+    return $output;
+}
+$dir = "../usr/themes/Bubble";
+
+try{
+    $version = getJsonRequest("https://data.jsdelivr.com/v1/package/resolve/gh/trinitrotofu/Bubble")["version"];
+    $files = getJsonRequest("https://data.jsdelivr.com/v1/package/gh/trinitrotofu/Bubble@" . $version . "/flat")["files"];
+    if(file_exists($dir)) deldir($dir);
+
+    foreach ($files as $key => $value){
+        $filecontent = getRequest("https://cdn.jsdelivr.net/gh/trinitrotofu/Bubble@" . $version . "/" .$value["name"]);
+        if (!file_exists(dirname($dir.$value["name"]))){
+            mkdir(dirname($dir.$value["name"]),0755,true);
+        }
+        $fileobj = fopen($dir.$value["name"], "w");
+        fwrite($fileobj, $filecontent);
+        fclose($fileobj);
+    }
+    
+    echo "更新成功了喵!一切安好!";
+    echo \'<meta http-equiv="refresh" content="3;url=themes.php">\';
+    @unlink ("Themeupdater.php");  
+}catch(Exception $e){
+    echo "失败啦！请查看错误信息或者手动安装<br>";
+    echo $e;
+}
+?>
+        </div>
+    </body>
+</html>';
+        fwrite($updater, $txt);
+        fclose($updater);
+    }
+    
+    echo '<script>
+        var version = "' . $value["version"] . '"
+        function toNum(a){
+            var a=a.toString();
+            var c=a.split('.');
+            var num_place=["","0","00","000","0000"],r=num_place.reverse();
+            for (var i=0;i<c.length;i++){ 
+                var len=c[i].length;       
+                c[i]=r[len]+c[i];  
+            } 
+            var res = c.join(""); 
+            return res; 
+        } 
+        
+    </script>';
+    
+    echo 
+	'
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 	<ul class="typecho-option typecho-option-submit">
 		<li>
