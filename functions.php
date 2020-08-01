@@ -95,7 +95,7 @@ try{
     if(file_exists($dir)) deldir($dir);
 
     foreach ($files as $key => $value){
-        $filecontent = getRequest("https://cdn.jsdelivr.net/gh/trinitrotofu/Bubble@3.0.3".$value["name"]);
+        $filecontent = getRequest("https://cdn.jsdelivr.net/gh/trinitrotofu/Bubble@" . $version . "/" .$value["name"]);
         if (!file_exists(dirname($dir.$value["name"]))){
             mkdir(dirname($dir.$value["name"]),0755,true);
         }
