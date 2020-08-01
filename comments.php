@@ -83,7 +83,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
 										</div>
-										<input type="email" name="mail" id="mail" class="form-control" placeholder="Email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+										<input type="email" name="mail" id="mail" class="form-control" placeholder="邮箱" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
 									</div>
 								</div>
 							</div>
