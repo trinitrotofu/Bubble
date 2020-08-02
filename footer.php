@@ -1,13 +1,17 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 		<?php if ($this->user->hasLogin()) { ?>
 			<?php if ($this->is('single')) { ?>
-			<a href="<?php $this->options->adminUrl(); ?>write-<?php echo $this->is('post')?'post':'page'; ?>.php?cid=<?php echo $this->cid;?>"><button class="btn btn-icon-only rounded-circle btn-primary admin-btn">
-				<span class="btn-inner--icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-			</button></a>
+			<a href="<?php $this->options->adminUrl(); ?>write-<?php echo $this->is('post')?'post':'page'; ?>.php?cid=<?php echo $this->cid;?>">
+				<button id="adminbtn" class="btn btn-icon-only rounded-circle btn-primary admin-btn">
+					<span class="btn-inner--icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+				</button>
+			</a>
 			<?php } else { ?>
-			<a href="<?php $this->options->adminUrl(); ?>"><button class="btn btn-icon-only rounded-circle btn-primary admin-btn">
-				<span class="btn-inner--icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-			</button></a>
+			<a href="<?php $this->options->adminUrl(); ?>">
+				<button id="adminbtn" class="btn btn-icon-only rounded-circle btn-primary admin-btn">
+					<span class="btn-inner--icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+				</button>
+			</a>
 			<?php } ?>
 		<?php } ?>
 	</main>
@@ -77,6 +81,11 @@
 		</div>
 	</footer>
 	<?php if($this->options->Pjax) _e('</div>'); ?>
+	<a id="scrollup" href="#" style="display: none;">
+		<button id="scrollbtn" class="btn btn-icon-only rounded-circle btn-secondary scrollup-btn">
+			<span class="btn-inner--icon"><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+		</button>
+	</a>
 	<!-- Core -->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
@@ -85,15 +94,47 @@
 	<!-- Theme JS -->
 	<script src="<?php $this->options->themeUrl("assets/js/argon.min.js"); ?>"></script>
 	<script src="<?php $this->options->themeUrl("assets/js/bbrender.js"); ?>"></script>
+	<!-- scrollup -->
+	<script>
+		$(function(){
+			var scrollBottom = parseInt($("#adminbtn").css("bottom")) + parseInt($("#adminbtn").css("height")) + 25;
+			$("#scrollbtn").css("bottom", scrollBottom);
+			var resizeTimer;
+			$(window).resize(function(e) {
+				if ($("#adminbtn").length > 0)
+				{
+					clearTimeout(resizeTimer);
+					resizeTimer = setTimeout(function() {
+						scrollBottom = parseInt($("#adminbtn").css("bottom")) + parseInt($("#adminbtn").css("height")) + 25;
+						$("#scrollbtn").css("bottom", scrollBottom);
+					}, 250);
+				}
+			});
+			var scrollLock = 0;
+			if ($(window).scrollTop() > 500) $("#scrollup").fadeIn(400);
+			$(window).scroll(function() {
+				if (!scrollLock)
+				{
+					if ($(window).scrollTop() > 500) $("#scrollup").fadeIn(400);
+					else $("#scrollup").fadeOut(400);
+				}
+			});
+			$("#scrollup").click(function() {
+				scrollLock = 1;
+				$("#scrollup").fadeOut(400);
+				$("html,body").animate({scrollTop: "0px"}, 500, function() {
+					scrollLock = 0;
+				});
+			});
+		});
+	</script>
+	<!-- Viewer -->
+	<script>$('.content').viewer({url: 'src'})</script>
 	<!-- Pjax -->
 	<?php if($this->options->Pjax): ?>
 	<script>
-		$('.content').viewer({
-			url: 'src'
-		})
 		function init(){
 			<?php $this->options->pjaxcomp() ?>
-			
 			<?php if($this->options->prismjs): ?>
 			var pres = document.querySelectorAll('pre');
 			var lineNumberClassName = 'line-numbers';

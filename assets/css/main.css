@@ -19165,3 +19165,24 @@ p {
 .content img {
     cursor: pointer;
 }
+
+.scrollup-btn {
+    right: 45px;
+    bottom: 45px;
+    position: fixed;
+    z-index: 99999;
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    background-color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+    .scrollup-btn {
+        right: 15px;
+        bottom: 15px;
+        height: 50px;
+        width: 50px;
+        font-size: 18px;
+    }
+}
