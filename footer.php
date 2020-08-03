@@ -128,14 +128,11 @@
 			});
 		});
 	</script>
-	<!-- Viewer -->
-	<script>$('.content').viewer({url: 'src'})</script>
 	<!-- Pjax -->
-	<?php if($this->options->Pjax): ?>
+	
 	<script>
 		function init(){
-			<?php $this->options->pjaxcomp() ?>
-			<?php if($this->options->prismjs): ?>
+			<?php if($this->options->prismjs and $this->options->prismLine): ?>
 			var pres = document.querySelectorAll('pre');
 			var lineNumberClassName = 'line-numbers';
 			pres.forEach(function (item, index) {
@@ -143,6 +140,7 @@
 			});
 			Prism.highlightAll(false,null);
 			<?php endif; ?>
+
 			<?php if($this->options->katex): ?>
 			try{
 				renderMathInElement(document.body,{
@@ -155,9 +153,12 @@
 			<?php endif; ?>
 			parseBbcode()
 			parseBblink()
+			<?php if($this->options->Pjax): ?>
+			<?php $this->options->pjaxcomp() ?>
 			try{
 				window.onload()
 			}catch{}
+			<?php endif; ?>
 			setTimeout(() => {
 				$('.content').viewer({
 					url: 'src'
@@ -171,7 +172,15 @@
 				viewer.destroy()
 			}
 		}
+		window.addEventListener("popstate", function(e) {
+			setTimeout(() => {
+				$('.content').viewer({
+					url: 'src'
+				})
+			},300)
+		}, false);
 	</script>
+	<?php if($this->options->Pjax): ?>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.js"></script>
 	<script src="<?php $this->options->themeUrl("assets/js/progress.js"); ?>"></script>
 	<script>
@@ -209,14 +218,6 @@
 	<?php if($this->options->katex): ?>
 	<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
-	<script>
-		renderMathInElement(document.body,{
-			delimiters: [
-				{left: "$$", right: "$$", display: true},
-				{left: "$", right: "$", display: false}
-			]
-		});
-	</script>
 	<?php endif; ?>
 	<!-- Prism JS -->
 	<?php if($this->options->prismjs): ?>
@@ -225,16 +226,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/toolbar/prism-toolbar.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/show-language/prism-show-language.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-	<script>
-		var pres = document.querySelectorAll('pre');
-		var lineNumberClassName = 'line-numbers';
-		pres.forEach(function (item, index) {
-			item.className = item.className == '' ? lineNumberClassName : item.className + ' ' + lineNumberClassName;
-		});
-	</script>
-		<?php if($this->options->prismLine): ?>
+	<?php if($this->options->prismLine): ?>
 		<script src="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-		<?php endif; ?>
+	<?php endif; ?>
 	<?php endif; ?>
 	<!-- Alert -->
 	<div id="modal-notification" class="modal fade show" id="modal-notification" style="z-index: 102;display: none;">
@@ -257,6 +251,7 @@
 			else $("#msgDetail").html("")
 			$("#modal-notification").show("normal");
 		}
+		init()
 	</script>
 	<!-- Typecho footer -->
 	<?php $this->footer(); ?>

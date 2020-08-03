@@ -30,17 +30,35 @@
 				onshow = !onshow
 			}
 			function jumpto(num){
-				$('html,body').animate({ scrollTop: $('[name="cl-'+num+'"]').offset().top-100 }, 500)
+				$('html,body').animate({ scrollTop: $('[name="cl-'+num+'"]').offset().top-120 }, 500)
 			}
 			$("#toc-nomiao").click(tocshow)
-			<?php if($this->options->toc_enable): ?>
-			$(document).ready(function() {     
-				tocshow()
-			}); 
-			<?php endif; ?>
+			var nowtoc = "cl-1"
+			$(document).ready(function() { 
+				<?php if($this->options->toc_enable): ?>
+					tocshow()
+				<?php endif; ?>
+				$(document).scroll(function() {
+					for(var ele of $("*[name*='cl-']").get().reverse()){
+						if($(document).scrollTop() + 121 > $(ele).offset().top){
+							if(nowtoc != ele.name){
+								var tocele = $("*[name*='dl-" + nowtoc.replace("cl-","") + "']")
+								tocele.removeClass("located")
+								
+
+								tocele = $("*[name*='dl-" + ele.name.replace("cl-","") + "']")
+								tocele.addClass("located")
+								$(".toc-list").animate({scrollTop:$(".toc-list").scrollTop() -50 + tocele.position().top}, 80)
+								nowtoc = ele.name
+							}
+							break
+						}
+					}
+					//
+				})
+			});
 		</script>
 		<?php endif; ?>
-
 		<section class="section section-lg section-hero section-shaped">
 			<?php printBackground(getRandomImage($this->options->randomImage), $this->options->bubbleShow); ?>
 			<div class="container shape-container d-flex align-items-center py-lg">

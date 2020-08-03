@@ -367,7 +367,7 @@ function getCatalog() {
 					$index .= '</li>';
 				}
 			}
-			$index .= '<li><a href="javascript:jumpto('.$catalog_item['count'].')">'.$catalog_item['text'].'</a>';
+			$index .= '<li><a name="dl-' . $catalog_item['count'] . '" href="javascript:jumpto('.$catalog_item['count'].')">'.$catalog_item['text'].'</a>';
 			$prev_depth = $catalog_item['depth'];
 		}
 		for ($i=0; $i<=$to_depth; $i++) {
