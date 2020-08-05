@@ -12,7 +12,7 @@
 			'author'    =>  _t('%s 的文章')
 		), '', ' - '); ?><?php
 		$this->options->title();
-		if ($this->is('index') && $this->options->subtitle() != '') echo ' - '.$this->options->subtitle();
+		if ($this->is('index') && $this->options->subtitle != '') echo " - {$this->options->subtitle}";
 	?></title>
 
 	<!-- Favicon -->
