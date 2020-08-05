@@ -4,7 +4,7 @@
  * 
  * @package Bubble
  * @author TriNitroTofu, Rorical, Boshi
- * @version 3.0.3
+ * @version 4.0.0
  * @link https://github.com/trinitrotofu/Bubble
  */
 
@@ -36,13 +36,16 @@
 				</div>
 			</div>
 		</section>
-		<div class="card shadow content-card list-card content-card-head">
-			<!-- Article list -->
-			<?php while($this->next()): ?>
-				<?php printAricle($this); ?>
-			<?php endwhile; ?>
-			<!-- Toggle page -->
-			<?php printToggleButton($this); ?>
-		</div>
+		<section class="section section-components bg-secondary content-card-container">
+			<div class="container container-lg py-5 align-items-center content-card-container">
+				<!-- Article list -->
+				<?php $first_flag = true; ?>
+				<?php while($this->next()): ?>
+					<?php printAricle($this, $first_flag); $first_flag = false; ?>
+				<?php endwhile; ?>
+				<!-- Toggle page -->
+				<?php printToggleButton($this); ?>
+			</div>
+		</section>
 		<?php if($this->_currentPage>1) echo("<script>$('html,body').animate({ scrollTop: $('.card.shadow.content-card.list-card.content-card-head').offset().top}, 500)</script>") ?>
 <?php $this->need('footer.php'); ?>

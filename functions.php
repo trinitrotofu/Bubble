@@ -1,6 +1,185 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 function themeConfig($form) {
+	Typecho_Widget::widget('Widget_Themes_List')->to($themes);
+	foreach ($themes -> stack as $key => $value){
+		if($value["activated"]==1){
+			break;
+		}
+	}
+	
+	if(!file_exists("themeupdater.php")){
+		$updater = fopen("themeupdater.php", "w");
+		$txt = '
+		<html>
+			<head>
+				<title>Updater</title>
+				<meta charset="UTF-8">
+				<style>
+					html {
+						padding: 50px 10px;
+						font-size: 16px;
+						line-height: 1.4;
+						color: #666;
+						background: #F6F6F3;
+						-webkit-text-size-adjust: 100%;
+						-ms-text-size-adjust: 100%;
+					}
+
+					html,
+					input { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+					body {
+						max-width: 500px;
+						max-height: 30px;
+						padding: 30px 20px;
+						margin: 0 auto;
+						background: #FFF;
+					}
+					ul {
+						padding: 0 0 0 40px;
+					}
+					.container {
+						max-width: 380px;
+						_width: 380px;
+						margin: 0 auto;
+					}
+				</style>
+			</head>
+			<body>
+				<div class="container">
+				<?php
+				function getJsonRequest($url){
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $url);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					$output = curl_exec($ch);
+					curl_close($ch);
+					$output = json_decode($output,true);
+					return $output;
+				}
+				function deldir($dir) {
+					$dh=opendir($dir);
+					while ($file=readdir($dh)) {
+						if($file!="." && $file!="..") {
+							$fullpath=$dir."/".$file;
+							if(!is_dir($fullpath)) {
+								unlink($fullpath);
+							} else {
+								deldir($fullpath);
+							}
+						}
+					}
+					closedir($dh);
+					if(rmdir($dir)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				function getRequest($url){
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $url);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					$output = curl_exec($ch);
+					curl_close($ch);
+					return $output;
+				}
+				$dir = "../usr/themes/Bubble";
+
+				try{
+					$version = getJsonRequest("https://data.jsdelivr.com/v1/package/resolve/gh/trinitrotofu/Bubble")["version"];
+					$files = getJsonRequest("https://data.jsdelivr.com/v1/package/gh/trinitrotofu/Bubble@" . $version . "/flat")["files"];
+					if(file_exists($dir)) deldir($dir);
+
+					foreach ($files as $key => $value){
+						$filecontent = getRequest("https://cdn.jsdelivr.net/gh/trinitrotofu/Bubble@" . $version . "/" .$value["name"]);
+						if (!file_exists(dirname($dir.$value["name"]))){
+							mkdir(dirname($dir.$value["name"]),0755,true);
+						}
+						$fileobj = fopen($dir.$value["name"], "w");
+						fwrite($fileobj, $filecontent);
+						fclose($fileobj);
+					}
+					
+					echo "主题更新成功！即将返回主题页面。";
+					echo \'<meta http-equiv="refresh" content="3;url=themes.php">\';
+					@unlink ("themeupdater.php");  
+				}catch(Exception $e){
+					echo "更新失败！请查看错误信息或者手动更新。<br>";
+					echo $e;
+				}
+				?>
+				</div>
+			</body>
+		</html>';
+		fwrite($updater, $txt);
+		fclose($updater);
+	}
+	
+	echo '<script>
+		var version = "' . $value["version"] . '"
+		function toNum(a){
+			var a=a.toString();
+			var c=a.split('.');
+			var num_place=["","0","00","000","0000"],r=num_place.reverse();
+			for (var i=0;i<c.length;i++){ 
+				var len=c[i].length;	   
+				c[i]=r[len]+c[i];  
+			} 
+			var res = c.join(""); 
+			return res; 
+		} 
+		
+	</script>';
+	
+	echo 
+	'
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+	<ul class="typecho-option typecho-option-submit">
+		<li>
+			<label class="typecho-label">
+				主题更新
+			</label>
+		</li>
+		<li>
+			<p class="description" id="update-dec">
+				正在检查更新...
+			</p>
+		</li>
+		<li hidden id="update-btn-li">
+			<button type="button" class="btn default" id="update-btn">
+			</button>
+		</li>
+	</ul>
+	<script>
+		$.ajax({
+		url: "https://data.jsdelivr.com/v1/package/resolve/gh/trinitrotofu/Bubble",
+		dataType: "json",
+		timeout: 10000,
+		success: function(data) {
+			var releaseVersion = data["version"]
+			$("#update-btn-li").show()
+			$("#update-dec").html("")
+
+			$("#update-btn").html("最新版本号为" + releaseVersion + "，当前版本为" + version + "，" + (toNum(releaseVersion) > toNum(version) ? "你正在使用旧版本主题。点击更新" : "你已更新至最新版本"));
+			if (toNum(releaseVersion) > toNum(version)) {
+				$("#update-btn").click(function() {
+					window.location.href = "themeupdater.php"
+				});
+			}
+		},
+		error: function() {
+			$("#update-dec").html("检查更新程序出错！")
+		}
+	});
+	</script>';
+
+	$subtitle = new Typecho_Widget_Helper_Form_Element_Text('subtitle', NULL, '', _t('站点副标题'), _t('在这里填入站点副标题，以在网站标题后显示'));
+	$form->addInput($subtitle);
 	$logoUrl = new Typecho_Widget_Helper_Form_Element_Text('logoUrl', NULL, '', _t('站点 LOGO 地址'), _t('在这里填入一个图片 URL 地址，以在网站标题前加上一个 LOGO'));
 	$form->addInput($logoUrl);
 	$avatarUrl = new Typecho_Widget_Helper_Form_Element_Text('avatarUrl', NULL, '', _t('站点头像地址'), _t('在这里填入一个图片 URL 地址，以在网站首页上加上一个头像'));
@@ -39,6 +218,18 @@ function themeConfig($form) {
 		),
 	'prism', _t('prism.js 高亮主题'), _t('选择 prism.js 代码高亮的主题配色'));
 	$form->addInput($prismTheme);
+	$toc = new Typecho_Widget_Helper_Form_Element_Radio('toc',
+		array('0' => _t('关闭'),
+			'1' => _t('打开'),
+		),
+		'1', _t('开启 TOC 文章目录功能'), _t('选择是否开启 TOC 文章目录功能'));
+	$form->addInput($toc);
+	$toc_enable = new Typecho_Widget_Helper_Form_Element_Radio('toc_enable',
+		array('0' => _t('关闭'),
+			'1' => _t('展开'),
+		),
+		'0', _t('默认 TOC 目录展开状态'), _t('选择打开文章时 TOC 目录的展开状态'));
+	$form->addInput($toc_enable);
 }
 
 function printCategory($that, $icon = 0) { ?>
@@ -63,34 +254,36 @@ function printTag($that, $icon = 0) { ?>
 	</span>
 <?php }
 
-function printAricle($that) { ?>
-	<section class="section">
-		<div class="container">
-			<div class="content">
-				<h1><a class="text-default" href="<?php $that->permalink() ?>"><?php $that->title() ?></a></h1>
-				<div class="list-object">
-					<span class="list-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="<?php $that->date('c'); ?>"><?php $that->date();?></time></span>
-					<span class="list-tag"><i class="fa fa-comments-o" aria-hidden="true"></i> <?php $that->commentsNum('%d');?> 条评论</span>
-					<?php printCategory($that, 1); ?>
-					<?php printTag($that, 1); ?>
-					<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $that->author->permalink(); ?>"><?php $that->author();?></a></span>
+function printAricle($that, $flag) { ?>
+	<div class="card shadow content-card list-card <?php if ($flag): ?>content-card-head<?php endif; ?>">
+		<section class="section">
+			<div class="container">
+				<div class="content">
+					<h1><a class="text-default" href="<?php $that->permalink() ?>"><?php $that->title() ?></a></h1>
+					<div class="list-object">
+						<span class="list-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="<?php $that->date('c'); ?>"><?php $that->date();?></time></span>
+						<span class="list-tag"><i class="fa fa-comments-o" aria-hidden="true"></i> <?php $that->commentsNum('%d');?> 条评论</span>
+						<?php printCategory($that, 1); ?>
+						<?php printTag($that, 1); ?>
+						<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $that->author->permalink(); ?>"><?php $that->author();?></a></span>
+					</div>
+					<?php $that->content(''); ?>
+					<br/>
+					<a href="<?php $that->permalink() ?>">
+						<button class="btn btn-icon btn-3 btn-outline-primary" type="button">
+							<span class="btn-inner--icon"><i class="fa fa-play" aria-hidden="true"></i></span>
+							<span class="btn-inner--text">继续阅读</span>
+						</button>
+					</a>
 				</div>
-				<?php $that->content(''); ?>
-				<br/>
-				<a href="<?php $that->permalink() ?>">
-					<button class="btn btn-icon btn-3 btn-outline-primary" type="button">
-						<span class="btn-inner--icon"><i class="fa fa-play" aria-hidden="true"></i></span>
-						<span class="btn-inner--text">继续阅读</span>
-					</button>
-				</a>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 <?php }
 
 function printToggleButton($that) {
 	if ($that->getTotal() > $that->parameter->pageSize) { ?>
-		<section class="section">
+		<section class="section" style="padding-bottom: 1rem; padding-top: 6rem">
 			<div class="container">
 				<nav class="page-nav"><?php $that->pageNav('<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>', 1, '...', array('wrapTag' => 'ul', 'wrapClass' => 'pagination justify-content-center', 'textTag' => 'a', 'currentClass' => 'active', 'prevClass' => '', 'nextClass' => '')); ?></nav>
 			</div>
@@ -126,9 +319,66 @@ function getRandomImage($str)
 
 function clear_urlcan($url)
 {
-    $rstr='';
-    $tmparr=parse_url($url);
-    $rstr=empty($tmparr['scheme'])?'http://':$tmparr['scheme'].'://';
-    $rstr.=$tmparr['host'].$tmparr['path'];
-    return $rstr;
+	$rstr='';
+	$tmparr=parse_url($url);
+	$rstr=empty($tmparr['scheme'])?'http://':$tmparr['scheme'].'://';
+	$rstr.=$tmparr['host'].$tmparr['path'];
+	return $rstr;
+}
+
+function createCatalog($obj) {
+	global $catalog;
+	global $catalog_count;
+	$catalog = array();
+	$catalog_count = 0;
+	$obj = preg_replace_callback('/<h([1-6])(.*?)>(.*?)<\/h\1>/i', function($obj) {
+		global $catalog;
+		global $catalog_count;
+		$catalog_count ++;
+		$catalog[] = array('text' => trim(strip_tags($obj[3])), 'depth' => $obj[1], 'count' => $catalog_count);
+		return '<h'.$obj[1].$obj[2].'><a name="cl-'.$catalog_count.'"></a>'.$obj[3].'</h'.$obj[1].'>';
+	}, $obj);
+	return $obj;
+}
+
+function getCatalog() {
+	global $catalog;
+	$index = '';
+	if ($catalog) {
+		$index = '<ul>'."\n";
+		$prev_depth = '';
+		$to_depth = 0;
+		foreach($catalog as $catalog_item) {
+			$catalog_depth = $catalog_item['depth'];
+			if ($prev_depth) {
+				if ($catalog_depth == $prev_depth) {
+					$index .= '</li>'."\n";
+				} elseif ($catalog_depth > $prev_depth) {
+					$to_depth++;
+					$index .= '<ul>'."\n";
+				} else {
+					$to_depth2 = ($to_depth > ($prev_depth - $catalog_depth)) ? ($prev_depth - $catalog_depth) : $to_depth;
+					if ($to_depth2) {
+						for ($i=0; $i<$to_depth2; $i++) {
+							$index .= '</li>'."\n".'</ul>'."\n";
+							$to_depth--;
+						}
+					}
+					$index .= '</li>';
+				}
+			}
+			$index .= '<li><a name="dl-' . $catalog_item['count'] . '" href="javascript:jumpto('.$catalog_item['count'].')">'.$catalog_item['text'].'</a>';
+			$prev_depth = $catalog_item['depth'];
+		}
+		for ($i=0; $i<=$to_depth; $i++) {
+			$index .= '</li>'."\n".'</ul>'."\n";
+		}
+	}
+	echo $index;
+}
+
+function themeInit($archive) {
+	if ($archive->is('single')) {
+		$archive->content = createCatalog($archive->content);
+	}
 }

@@ -25,11 +25,27 @@ Demo:  [https://tntofu.com/](https://tntofu.com/)
 # 使用
 ## 安装
 
-直接下载 zip 源码，解压后修改文件夹名称，移动到 Typecho 主题目录，也可以直接在服务器上用 git clone 下载主题。
+在 [Releases](https://github.com/trinitrotofu/Bubble/releases) 下载 zip 源码，解压后移动到 Typecho 主题目录。
 
 ## 设置
 
 主题设置页面位置：Typecho 后台->控制台->外观->设置外观。
+
+## 更新
+
+主题有自动检查更新功能，并且能够一键安装更新。
+
+自动更新按钮设置在主题设置页面中。
+
+自动更新将从 jsdelivr 的 CDN 上下载最新版本的主题以替换旧版本主题。
+
+你也可以手动更新，手动更新步骤为：删除旧版本，并安装新版本。
+
+请注意，由于 Typecho 本身设计的原因，主题更新后可能会添加新的设置项，如果不禁用主题并重新启用（通过启用其他主题），新设置项将被留空并可能导致 Bug，所以请在更新后重启主题，或者请仔细检查是否有留空的设置项（这里主要指选择型设置项，文本类设置项似乎没这个问题）。
+
+### 站点副标题
+
+该项用以设定首页的标题栏中站点标题后显示的文字。
 
 ### 站点 LOGO
 
@@ -99,17 +115,34 @@ myFunction();
 
 ### katex 数学公式渲染
 
-该项用以选择是否启用 katex 数学公式渲染
+该项用以选择是否启用 katex 数学公式渲染。
 
 ### prism.js 代码高亮
 
-该项用以选择是否启用 prism.js 代码高亮
+该项用以选择是否启用 prism.js 代码高亮。
+
+### prism.js 行号显示
+
+该项用以选择代码高亮是否显示行号。
 
 ### prism.js 高亮主题
 
-该项用以选择 prism.js 代码高亮的主题配色
+该项用以选择 prism.js 代码高亮的主题配色。
+
+### TOC 文章目录
+
+该项用以选择是否启用 TOC 文章目录功能。
+
+启用后将在文章页右侧显示一个可展开和关闭的 TOC 目录。
+
+### TOC 目录展开状态
+
+该项用以选择 TOC 目录栏是否默认展开。
 
 ## 短代码
+
+*注意：若无法正常使用此功能，请尝试关闭第三方插件，如第三方文章编辑器。*
+
 ### 高亮代码框
 
 标签名：
@@ -166,15 +199,9 @@ myFunction();
 
 ![bblink.png](https://i.loli.net/2020/04/07/13ZtBldaNuxqrch.png)
 
-## 更新
-
-更新步骤为：删除旧版本，并安装新版本
-
-请注意，由于 Typecho 本身设计的原因，主题更新后可能会添加新的设置项，如果不禁用主题并重新启用（通过启用其他主题），新设置项将被留空并可能导致 Bug，所以请在更新后重启主题，或者请仔细检查是否有留空的设置项（这里主要指选择型设置项，文本类设置项似乎没这个问题）
-
 # 截图
 
-![screenshot.png](https://i.loli.net/2020/04/07/kPUQVhKDS1JMaGH.png)
+![screenshot.jpg](./screenshot.jpg)
 
 # License
 
@@ -185,15 +212,21 @@ Open sourced under the MIT license.
 + 主题由[三硝基豆腐](https://github.com/trinitrotofu)、[Rorical](https://github.com/Liupaperbox)和[Totorato](https://github.com/totorato)三人共同完成
 + 基于[Argon Design System](https://www.creative-tim.com/product/argon-design-system)
 + 评论模块中部分代码参照了 Typecho 官方主题 Default
-+ Rorical 的 Rorical 主题（同样基于 argon design system）：[https://github.com/Liupaperbox/Rorical](https://github.com/Liupaperbox/Rorical)
++ Rorical 的 Rorical 主题（同样基于 argon design system）：[https://github.com/Liupaperbox/Rorical](https://github.com/Rorical/Rorical)
 + Totorator 的修改版 Bubble 主题：[https://github.com/totorato/Bubble](https://github.com/totorato/Bubble)
 
-# Todo
-
-+ 自定义标签，如代码块
-+ 将自定义 css 移动到主题设置中实时更新
-
 # 更新历史
+
+## 4.0.0
+
++ 更改页面布局为卡片式布局
++ 新增自动更新功能
++ 新增 TOC 目录功能
++ 新增 viewer.js 图片查看器（点击放大）
++ 新增回到顶部按钮
++ 新增副标题设置功能
+
+
 ## 3.0.3
 
 + 优化 pjax 进度条显示

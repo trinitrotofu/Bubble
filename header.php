@@ -6,11 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<title><?php $this->archiveTitle(array(
-		'category'  =>  _t('%s下的文章'),
-		'search'    =>  _t('包含关键字 %s 的文章'),
-		'tag'       =>  _t('标签 %s 下的文章'),
-		'author'    =>  _t('%s 的文章')
-	), '', ' - '); ?><?php $this->options->title(); ?></title>
+			'category'  =>  _t('%s 下的文章'),
+			'search'    =>  _t('包含关键字 %s 的文章'),
+			'tag'       =>  _t('标签 %s 下的文章'),
+			'author'    =>  _t('%s 的文章')
+		), '', ' - '); ?><?php
+		$this->options->title();
+		if ($this->is('index') && $this->options->subtitle() != '') echo ' - '.$this->options->subtitle();
+	?></title>
 
 	<!-- Favicon -->
 	<link href="<?php
@@ -44,6 +47,9 @@
 		<?php endif; ?>
 	<?php endif; ?>
 
+	<!-- Viewer CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.css" />
+	
 	<!-- Jquery -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 
@@ -51,12 +57,13 @@
 	<?php if ($this->options->customCss): ?>
 	<style type="text/css"><?php $this->options->customCss(); ?></style>
 	<?php endif; ?>
-
+	<!-- Viewer.js Plugin -->
+	<script src="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/fengyuanchen/jquery-viewer@master/dist/jquery-viewer.min.js"></script>
 	<!-- Typecho header -->
 	<?php $this->header(); ?>
 </head>
 <body>
-	
 	<header class="header-global">
 		<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
 			<div class="container">
@@ -106,5 +113,4 @@
 			</div>
 		</nav>
 	</header>
-	
 	<?php if($this->options->Pjax) _e('<div id="pjax-container">'); ?>
