@@ -60,8 +60,14 @@
 	<!-- Viewer.js Plugin -->
 	<script src="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/fengyuanchen/jquery-viewer@master/dist/jquery-viewer.min.js"></script>
+	<!-- MD5 Js -->
+	<script src="https://cdn.jsdelivr.net/gh/blueimp/JavaScript-MD5/js/md5.min.js"></script>
 	<!-- Typecho header -->
-	<?php $this->header(); ?>
+	<?php if($this->options->Pjax=="1"): ?>
+		<?php $this->header('commentReply=0&antiSpam=0'); ?>
+	<?php else: ?>
+		<?php $this->header('commentReply=0'); ?>
+	<?php endif; ?>
 </head>
 <body>
 	<header class="header-global">

@@ -17,6 +17,9 @@
 			<div class="comment-body">
 				<div class="comment-head">
 					<h5><?php $comments->author(); ?> · <small><?php $comments->date('Y-m-d H:i'); ?></small><?php
+					if ($comments->status == 'waiting') {
+						?><span class="badge badge-pill badge-default text-white">评论审核ing...</span><?php
+					}
 					if ($comments->authorId) {
 						if ($comments->authorId == $comments->ownerId) {
 							_e(' <span class="badge badge-pill badge-primary"><i class="fa fa-user-o" aria-hidden="true"></i> 作者</span>');
@@ -54,7 +57,7 @@
 			<?php endif; ?>
 			<div class="comment-card">
 				<?php if($this->allow('comment')): ?>
-				<div id="<?php $this->respondId(); ?>" class="comment-reply">
+				<div id="respond-post" class="comment-reply">
 					<div class="row align-items-center justify-content-center">
 						<h3 id="response"><?php _e('发表评论'); ?></h3>
 					</div>
@@ -71,7 +74,9 @@
 								<div class="form-group">
 									<div class="input-group mb-4">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+											<span class="input-group-text" style="padding: .4rem .5rem;">
+            									<div id="author-head" class="icon-shape rounded-circle text-white" style="width: 2rem;height: 2rem;background-image: url(https://secure.gravatar.com/avatar/);background-position: center;background-size: cover;background-repeat: no-repeat;"></div>
+            								</span>
 										</div>
 										<input type="text" name="author" id="author" class="form-control" placeholder="名称" value="<?php $this->remember('author'); ?>" required />
 									</div>
@@ -161,9 +166,13 @@
 			var pgid = start_progress()
 			$("#add-comment-button").attr("disabled",true)
 			var data = $(this).serializeArray()
+
+			<?php if($this->options->commentsAntiSpam){ ?>
 			var rubbish = <?php echo Typecho_Common::shuffleScriptVar(
             $this->security->getToken(clear_urlcan($this->request->getRequestUrl()))); ?>
             data.push({"name":"_","value":rubbish})
+			<?php } ?>
+
 			$.ajax({
             url: $(this).attr("action"),
             type: $(this).attr("method"),
@@ -195,21 +204,12 @@
 	}
 
 	bindsubmit()
-	var rubbishScripts = new DOMParser().parseFromString(`<?php echo $this->pluginHandle()->header("", $this);?>`, "text/html").getElementsByTagName("script")
-	var script
-	for(var i = 0; i<rubbishScripts.length; i++){
-		script = rubbishScripts[i].innerHTML
-		try {
-			eval(script)
-		} catch (error) {
-			alert(error)
-		}
-	}
 </script>
 
-<script type="text/javascript">
-    (function () {
-    window.TypechoComment = {
+<?php endif; ?>
+
+<script>
+	window.TypechoComment = {
         dom : function (id) {
             return document.getElementById(id);
         },
@@ -226,7 +226,7 @@
 
         reply : function (cid, coid) {
             var comment = this.dom(cid), parent = comment.parentNode,
-                response = this.dom('<?php $this->respondId() ?>'), input = this.dom('comment-parent'),
+                response = this.dom('respond-post'), input = this.dom('comment-parent'),
                 form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
                 textarea = response.getElementsByTagName('textarea')[0];
 
@@ -261,7 +261,7 @@
         },
 
         cancelReply : function () {
-            var response = this.dom('<?php $this->respondId() ?>'),
+            var response = this.dom('respond-post'),
             holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
 
             if (null != input) {
@@ -277,6 +277,11 @@
             return false;
         }
     };
-})();
+
+	$("#mail").on('blur',function(){
+    	url = "https://secure.gravatar.com/avatar/" + md5($(this).val()) + "?s=40&d="
+    	$("#author-head").css('background-image','url(' + url + ')'); 
+    })
+
+	
 </script>
-<?php endif; ?>

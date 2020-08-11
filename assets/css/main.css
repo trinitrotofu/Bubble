@@ -14569,6 +14569,7 @@ textarea[resize='horizontal'] {
 
 .section-components .badge {
     margin-right: .5rem;
+    margin-left: .5rem;
 }
 
 .section-components .modal-footer .btn {
