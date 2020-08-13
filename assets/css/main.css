@@ -145,6 +145,8 @@ dd {
 
 blockquote {
     margin: 0 0 1rem;
+    border-left: 2px solid rgba(136,152,170,.32);
+    padding-left: 1rem;
 }
 
 dfn {
@@ -15951,7 +15953,7 @@ p {
     background-size: cover;
     top: 0;
     left: 0;
-    filter: blur(1px);
+    filter: blur(3px);
 }
 
 .list-container{
