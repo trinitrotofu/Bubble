@@ -15951,7 +15951,7 @@ p {
     background-size: cover;
     top: 0;
     left: 0;
-    filter: blur(3px);
+    filter: blur(1px);
 }
 
 .list-container{
