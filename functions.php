@@ -256,8 +256,9 @@ function printTag($that, $icon = 0) { ?>
 
 function printAricle($that, $flag) { ?>
 	<div class="card shadow content-card list-card <?php if ($flag): ?>content-card-head<?php endif; ?>">
+	    <? if($that->fields->pic){ ?><div class="list-card-bg" style="background-image:url(<? echo $that->fields->pic ?>);"></div><? } ?>
 		<section class="section">
-			<div class="container">
+			<div class="container list-container">
 				<div class="content">
 					<h1><a class="text-default" href="<?php $that->permalink() ?>"><?php $that->title() ?></a></h1>
 					<div class="list-object">

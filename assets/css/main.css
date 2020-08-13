@@ -15942,3 +15942,18 @@ p {
 .located {
     color: #222f4f !important;
 }
+
+.list-card-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: center center;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    filter: blur(3px);
+}
+
+.list-container{
+    background-color: rgba(255,255,255,0.4);
+}

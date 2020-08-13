@@ -60,7 +60,7 @@
 		</script>
 		<?php endif; ?>
 		<section class="section section-lg section-hero section-shaped">
-			<?php printBackground(getRandomImage($this->options->randomImage), $this->options->bubbleShow); ?>
+			<?php printBackground(($this->fields->pic?$this->fields->pic:getRandomImage($this->options->randomImage)), $this->options->bubbleShow); ?>
 			<div class="container shape-container d-flex align-items-center py-lg">
 				<div class="col px-0 text-center">
 					<div class="row align-items-center justify-content-center">
