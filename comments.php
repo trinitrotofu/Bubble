@@ -1,3 +1,4 @@
+
 <?php function threadedComments($comments, $options) {
 		$commentLevelClass = $comments->_levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
@@ -16,7 +17,7 @@
 			</div>
 			<div class="comment-body">
 				<div class="comment-head">
-					<h5><?php $comments->author(); ?> · <small><?php $comments->date('Y-m-d H:i'); ?></small><?php
+					<h5><?php if ($comments->url) { ?><a target="_blank" rel="external nofollow" href="<?php echo $comments->url; ?>"><?php echo $comments->author; ?></a><?php } else { ?><?php echo $comments->author; ?><?php } ?> · <small><?php $comments->date('Y-m-d H:i'); ?></small><?php
 					if ($comments->status == 'waiting') {
 						?><span class="badge badge-pill badge-default text-white">评论审核ing...</span><?php
 					}
@@ -67,7 +68,7 @@
 					<br/>
 					<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form" class="container" style="overflow: auto; zoom: 1;">
 						<?php if($this->user->hasLogin()): ?>
-						<p><?php _e('已登录为'); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>。<a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('注销？'); ?></a></p>
+						<p><?php _e('已登录为'); ?><a no-pjax href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>;<a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('注销？'); ?></a></p>
 						<?php else: ?>
 						<div class="row">
 							<div class="col-md-4">
