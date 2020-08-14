@@ -140,7 +140,11 @@
 			});
 			Prism.highlightAll(false,null);
 			<?php endif; ?>
-
+            $("img").lazyload({
+                effect: "fadeIn",
+                threshold: 700,
+                placeholder_data_img: "<? $this->options->themeUrl("images/Loading.gif"); ?>"
+            });
 			<?php if($this->options->katex): ?>
 			try{
 				renderMathInElement(document.body,{
@@ -161,7 +165,7 @@
 			<?php endif; ?>
 			setTimeout(() => {
 				$('.content').viewer({
-					url: 'src'
+					url: 'data-original'
 				})
 			},300)
 		}
@@ -175,7 +179,7 @@
 		window.addEventListener("popstate", function(e) {
 			setTimeout(() => {
 				$('.content').viewer({
-					url: 'src'
+					url: 'data-original'
 				})
 			},300)
 		}, false);
