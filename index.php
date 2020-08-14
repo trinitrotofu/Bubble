@@ -47,5 +47,5 @@
 				<?php printToggleButton($this); ?>
 			</div>
 		</section>
-		<?php if($this->_currentPage>1) echo("<script>$('html,body').animate({ scrollTop: $('.card.shadow.content-card.list-card.content-card-head').offset().top}, 500)</script>") ?>
+		<?php if($this->_currentPage>1) echo("<script>$('html,body').animate({ scrollTop: $('.card.shadow.content-card.list-image-card.content-card-head').offset().top}, 500)</script>") ?>
 <?php $this->need('footer.php'); ?>

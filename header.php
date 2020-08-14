@@ -63,7 +63,8 @@
 	<!-- MD5 Js -->
 	<script src="https://cdn.jsdelivr.net/gh/blueimp/JavaScript-MD5/js/md5.min.js"></script>
 	<!-- LazyLoad Js -->
-	<script src="https://cdn.jsdelivr.net/gh/jieyou/lazyload/lazyload.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dkern/jquery.lazy/jquery.lazy.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dkern/jquery.lazy/jquery.lazy.plugins.min.js"></script>
 	<!-- Typecho header -->
 	<?php if($this->options->Pjax=="1"): ?>
 		<?php $this->header('commentReply=0&antiSpam=0'); ?>

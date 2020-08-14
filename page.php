@@ -22,7 +22,7 @@
 					<section class="section">
 						<div class="container">
 							<div class="content">
-								<?php $content = preg_replace('/<img(.*?)src=[\'"]([^\'"]+)[\'"](.*?)>/i',"<noscript>\$0</noscript><img\$1data-original=\"\$2\" \$3>",$this->content); 
+								<?php $content = preg_replace('/<img(.*?)src=[\'"]([^\'"]+)[\'"](.*?)>/i',"<noscript>\$0</noscript><img\$1data-src=\"\$2\" \$3>",$this->content); 
                 	                echo $content  ?>
 							</div>
 						</div>

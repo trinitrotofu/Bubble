@@ -255,12 +255,14 @@ function printTag($that, $icon = 0) { ?>
 <?php }
 
 function printAricle($that, $flag) { ?>
-	<div class="card shadow content-card list-card <?php if ($flag): ?>content-card-head<?php endif; ?>">
-	    <? if($that->fields->pic){ ?><div class="list-card-bg" style="background-image:url(<? echo $that->fields->pic ?>);"></div><? } ?>
-		<section class="section">
-			<div class="container list-container">
-				<div class="content">
-					<h1><a class="text-default" href="<?php $that->permalink() ?>"><?php $that->title() ?></a></h1>
+<? if($that->fields->pic){ ?>
+    
+    <a class="card shadow content-card list-image-card <?php if ($flag): ?>content-card-head<?php endif; ?>" href="<?php $that->permalink() ?>">
+        <div class="list-card-bg" data-src="<? echo $that->fields->pic ?>"></div>
+		<object class="list-image-card-section">
+			<div class="container">
+				<div class="content list-card-content">
+					<h1><?php $that->title() ?></h1>
 					<div class="list-object">
 						<span class="list-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="<?php $that->date('c'); ?>"><?php $that->date();?></time></span>
 						<span class="list-tag"><i class="fa fa-comments-o" aria-hidden="true"></i> <?php $that->commentsNum('%d');?> 条评论</span>
@@ -269,17 +271,29 @@ function printAricle($that, $flag) { ?>
 						<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $that->author->permalink(); ?>"><?php $that->author();?></a></span>
 					</div>
 					<?php $that->content(''); ?>
-					<br/>
-					<a href="<?php $that->permalink() ?>">
-						<button class="btn btn-icon btn-3 btn-outline-primary" type="button">
-							<span class="btn-inner--icon"><i class="fa fa-play" aria-hidden="true"></i></span>
-							<span class="btn-inner--text">继续阅读</span>
-						</button>
-					</a>
 				</div>
 			</div>
-		</section>
-	</div>
+		</object>
+	</a>
+<? }else{ ?>
+	<a class="card shadow content-card list-card <?php if ($flag): ?>content-card-head<?php endif; ?>" href="<?php $that->permalink() ?>">
+		<object class="section">
+			<div class="container">
+				<div class="content list-card-content">
+					<h1><?php $that->title() ?></h1>
+					<div class="list-object">
+						<span class="list-tag"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="<?php $that->date('c'); ?>"><?php $that->date();?></time></span>
+						<span class="list-tag"><i class="fa fa-comments-o" aria-hidden="true"></i> <?php $that->commentsNum('%d');?> 条评论</span>
+						<?php printCategory($that, 1); ?>
+						<?php printTag($that, 1); ?>
+						<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $that->author->permalink(); ?>"><?php $that->author();?></a></span>
+					</div>
+					<?php $that->content(''); ?>
+				</div>
+			</div>
+		</object>
+	</a>
+	<? } ?>
 <?php }
 
 function printToggleButton($that) {

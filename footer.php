@@ -140,10 +140,17 @@
 			});
 			Prism.highlightAll(false,null);
 			<?php endif; ?>
-            $("img").lazyload({
-                effect: "fadeIn",
+			$("img").Lazy({
                 threshold: 700,
-                placeholder_data_img: "<? $this->options->themeUrl("images/Loading.gif"); ?>"
+                effect: 'fadeIn',
+                effectTime: 1000,
+                defaultImage: "<? $this->options->themeUrl("images/Loading.gif"); ?>"
+            });
+            $("div[data-src]").Lazy({
+                threshold: 700,
+                effect: 'fadeIn',
+                placeholder: "<? $this->options->themeUrl("images/Loading.gif"); ?>",
+                effectTime: 1000
             });
 			<?php if($this->options->katex): ?>
 			try{
@@ -165,7 +172,7 @@
 			<?php endif; ?>
 			setTimeout(() => {
 				$('.content').viewer({
-					url: 'data-original'
+					url: 'data-src'
 				})
 			},300)
 		}
@@ -179,7 +186,7 @@
 		window.addEventListener("popstate", function(e) {
 			setTimeout(() => {
 				$('.content').viewer({
-					url: 'data-original'
+					url: 'data-src'
 				})
 			},300)
 		}, false);
