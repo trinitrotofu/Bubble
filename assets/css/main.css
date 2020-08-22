@@ -15498,7 +15498,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle {
     margin-bottom: 40px;
 }
 
-.comment-children ol {
+.comment-child-indent {
     padding-left: 40px;
 }
 
@@ -15526,9 +15526,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle {
         width: 40px !important;
         height: 40px !important;
     }
-    .comment-children ol {
-        padding-left: 15px !important;
-        border-left: 1px #cfcfcf solid;
+    .comment-child-indent {
+        padding-left: 20px;
     }
 }
 
