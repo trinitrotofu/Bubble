@@ -392,6 +392,18 @@ function getCatalog() {
 	echo $index;
 }
 
+function GetCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, the parent and the grandparent by default
+	$db = Typecho_Db::get();
+	$commentLine = [];
+	while((count($commentLine) < $depth) and (isset($coid) and 0 != $coid)) {
+		$row = $db->fetchRow($db->select()->from('table.comments')->where('coid = ? ', $coid));
+		if(empty($row)) break;
+		array_push($commentLine, $row);
+		$coid = $row['parent'];
+	}
+	return $commentLine;
+}
+
 function themeInit($archive) {
 	if ($archive->is('single')) {
 		$archive->content = createCatalog($archive->content);

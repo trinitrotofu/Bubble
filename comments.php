@@ -1,9 +1,17 @@
 
 <?php function threadedComments($comments, $options) {
 		$commentLevelClass = $comments->_levels > 0 ? ' comment-child' : ' comment-parent';
+
+		$indent = true;
+		$commentLine = GetCommentLineInDb($comments->coid);
+		/* 有上上层评论且上上层评论和本层评论是同一个人 */
+		if(count($commentLine)==3 and ($commentLine[2]['author'] == $comments->author))
+			$indent = false;
+		if(count($commentLine)==1) /* 如果是最顶层的回复同样不需要缩进 */
+			$indent = false;
 ?>
  
-<li id="li-<?php $comments->theId(); ?>">
+<li id="li-<?php $comments->theId(); ?>" class="<?php echo($indent? 'comment-child-indent':''); ?>">
 	<div id="<?php $comments->theId(); ?>">
 		<div  class="comment-item">
 			<div class="<?php 
@@ -17,7 +25,7 @@
 			</div>
 			<div class="comment-body">
 				<div class="comment-head">
-					<h5><?php if ($comments->url) { ?><a target="_blank" rel="external nofollow" href="<?php echo $comments->url; ?>"><?php echo $comments->author; ?></a><?php } else { ?><?php echo $comments->author; ?><?php } ?> · <small><?php $comments->date('Y-m-d H:i'); ?></small><?php
+					<h5><?php if ($comments->url) { ?><a target="_blank" rel="external nofollow" href="<?php echo $comments->url; ?>"><?php echo $comments->author; ?></a><?php } else { ?><?php echo $comments->author; ?><?php } ?><?php echo(count($commentLine) > 1?' <small>回复</small> ' . $commentLine[1]['author']:''); ?> · <small><?php $comments->date('Y-m-d H:i'); ?></small><?php
 					if ($comments->status == 'waiting') {
 						?><span class="badge badge-pill badge-default text-white">评论审核ing...</span><?php
 					}
