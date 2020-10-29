@@ -160,22 +160,29 @@
 						{left: "$", right: "$", display: false}
 					]
 				})
-			}catch{}
+			}catch(e){}
 			<?php endif; ?>
+
 			parseBbcode()
 			parseBblink()
+
 			<?php if($this->options->Pjax): ?>
-			<?php $this->options->pjaxcomp() ?>
+      ;<?php $this->options->pjaxcomp() ?>;
+
 			try{
 				window.onload()
-			}catch{}
+			}catch(e){}
 			<?php endif; ?>
+			<?php if ($this->options->viewerEnable): ?>
 			setTimeout(() => {
 				$('.content').viewer({
 					url: 'data-src'
 				})
 			},300)
+			<?php endif; ?>
 		}
+
+			<?php if ($this->options->viewerEnable): ?>
 		function destroy(){
 			// viewerjs
 			var viewer = $('.content').data('viewer');
@@ -190,6 +197,7 @@
 				})
 			},300)
 		}, false);
+			<?php endif; ?>
 	</script>
 	<?php if($this->options->Pjax): ?>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.js"></script>
@@ -206,7 +214,10 @@
 			$(".black-cover").fadeIn(400)
 			$('html,body').animate({ scrollTop: $('html').offset().top}, 500)
 
+			<?php if ($this->options->viewerEnable): ?>
 			destroy()
+			<?php endif; ?>
+
 		}).on('pjax:complete', function() {
 			$(".black-cover").fadeOut(400)
 			stop_progress(pgid)

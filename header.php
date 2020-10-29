@@ -48,8 +48,10 @@
 	<?php endif; ?>
 
 	<!-- Viewer CSS -->
+	<?php if ($this->options->viewerEnable): ?>
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.css" />
-	
+	<?php endif; ?>
+
 	<!-- Jquery -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 
@@ -57,9 +59,13 @@
 	<?php if ($this->options->customCss): ?>
 	<style type="text/css"><?php $this->options->customCss(); ?></style>
 	<?php endif; ?>
+
 	<!-- Viewer.js Plugin -->
+	<?php if ($this->options->viewerEnable): ?>
 	<script src="https://cdn.jsdelivr.net/npm/viewerjs/dist/viewer.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/fengyuanchen/jquery-viewer@master/dist/jquery-viewer.min.js"></script>
+	<?php endif; ?>
+
 	<!-- MD5 Js -->
 	<script src="https://cdn.jsdelivr.net/gh/blueimp/JavaScript-MD5/js/md5.min.js"></script>
 	<!-- LazyLoad Js -->
@@ -67,9 +73,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dkern/jquery.lazy/jquery.lazy.plugins.min.js"></script>
 	<!-- Typecho header -->
 	<?php if($this->options->Pjax=="1"): ?>
-		<?php $this->header('commentReply=0&antiSpam=0'); ?>
+		<?php $this->header('commentReply=&antiSpam='); ?>
 	<?php else: ?>
-		<?php $this->header('commentReply=0'); ?>
+		<?php $this->header('commentReply='); ?>
 	<?php endif; ?>
 </head>
 <body>
