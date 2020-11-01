@@ -407,7 +407,5 @@ function GetCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, th
 }
 
 function themeInit($archive) {
-	if ($archive->is('single')) {
-		$archive->content = createCatalog($archive->content);
-	}
+
 }

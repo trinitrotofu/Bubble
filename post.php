@@ -141,8 +141,7 @@ $this->need('header.php');
 							</div>
 							<? }else{ ?>
 							<?php
-							$content = preg_replace('/<img(.*?)src=[\'"]([^\'"]+)[\'"](.*?)>/i', "<noscript>\$0</noscript><img\$1data-src=\"\$2\" \$3>", $this->content);
-							echo $content
+                $this->content();
 							?>
 							<hr>
 							<ul>

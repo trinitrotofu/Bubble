@@ -1,4 +1,11 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+  if ($this->is('single')) {
+    if ($this->options->toc) {
+      $this->content = createCatalog($this->content);
+    }
+    $this->content = preg_replace('/<img(.*?)src=[\'"]([^\'"]+)[\'"](.*?)>/i',"<noscript>\$0</noscript><img\$1data-src=\"\$2\" \$3>",$this->content);
+  }
+  ?>
 <!DOCTYPE html>
 <html>
 <head>
