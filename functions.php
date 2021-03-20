@@ -196,6 +196,8 @@ function themeConfig($form) {
 	$form->addInput($footerWidget);
 	$customCss = new Typecho_Widget_Helper_Form_Element_Textarea('customCss', NULL, '', _t('自定义 css'), _t('在这里填入所需要的 css，以实现自定义页面样式，如调整字体大小等'));
 	$form->addInput($customCss);
+	$viewerEnable = new Typecho_Widget_Helper_Form_Element_Radio('viewerEnable', array('0' => _t('关闭'), '1' => _t('打开'),), '1', _t('开启 viewer.js 图片查看器（点击放大）'), _t('选择是否启用 viewer.js 图片查看器'));
+	$form->addInput($viewerEnable);
 	$Pjax = new Typecho_Widget_Helper_Form_Element_Radio('Pjax', array('0' => _t('关闭'), '1' => _t('打开')), '1', _t('开启全站 pjax 模式'), _t('选择是否启用全站 pjax 模式提升用户访问体验。注意：启用该项可能带来页面加载问题，请仔细阅读主题说明文档。'));
 	$form->addInput($Pjax);
 	$pjaxcomp = new Typecho_Widget_Helper_Form_Element_Textarea('pjaxcomp', NULL, '', _t('pjax 回调代码'), _t('在这里填入 pjax 渲染完毕后需执行的 JS 代码，具体使用方法请仔细阅读主题说明文档'));
@@ -405,7 +407,5 @@ function GetCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, th
 }
 
 function themeInit($archive) {
-	if ($archive->is('single')) {
-		$archive->content = createCatalog($archive->content);
-	}
+
 }
