@@ -85,7 +85,7 @@ $this->need('header.php');
 				<section class="section">
 					<div class="container">
 						<div class="content">
-							<? if($this->hidden){ ?>
+							<?php if($this->hidden){ ?>
 							<div class="container text-center">
 								<form class="protected" id="protected" action="<?php $this->permalink() ?>" method="post">
 									<textarea name="text" style="display:none;"></textarea>
@@ -139,7 +139,7 @@ $this->need('header.php');
 									})
 								</script>
 							</div>
-							<? }else{ ?>
+							<?php }else{ ?>
 							<?php
                 $this->content();
 							?>
@@ -148,7 +148,7 @@ $this->need('header.php');
 								<li>分类：<?php printCategory($this); ?></li>
 								<li>标签：<?php printTag($this); ?></li>
 							</ul>
-							<? } ?>
+							<?php } ?>
 						</div>
 					</div>
 				</section>

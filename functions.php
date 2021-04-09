@@ -257,10 +257,10 @@ function printTag($that, $icon = 0) { ?>
 <?php }
 
 function printAricle($that, $flag) { ?>
-<? if($that->fields->pic){ ?>
+<?php if($that->fields->pic){ ?>
     
     <a class="card shadow content-card list-image-card <?php if ($flag): ?>content-card-head<?php endif; ?>" href="<?php $that->permalink() ?>">
-        <div class="list-card-bg" data-src="<? echo $that->fields->pic ?>"></div>
+        <div class="list-card-bg" data-src="<?php echo $that->fields->pic ?>"></div>
 		<object class="list-image-card-section">
 			<div class="container">
 				<div class="content list-card-content">
@@ -272,12 +272,12 @@ function printAricle($that, $flag) { ?>
 						<?php printTag($that, 1); ?>
 						<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $that->author->permalink(); ?>"><?php $that->author();?></a></span>
 					</div>
-					<?php $that->content(''); ?>
+					<?php $that->excerpt(200,'...'); ?>
 				</div>
 			</div>
 		</object>
 	</a>
-<? }else{ ?>
+<?php }else{ ?>
 	<a class="card shadow content-card list-card <?php if ($flag): ?>content-card-head<?php endif; ?>" href="<?php $that->permalink() ?>">
 		<object class="section">
 			<div class="container">
@@ -290,12 +290,12 @@ function printAricle($that, $flag) { ?>
 						<?php printTag($that, 1); ?>
 						<span class="list-tag"><i class="fa fa-user-o" aria-hidden="true"></i> <a class="badge badge-warning badge-pill" href="<?php $that->author->permalink(); ?>"><?php $that->author();?></a></span>
 					</div>
-					<?php $that->content(''); ?>
+					<?php $that->excerpt(200,'...'); ?>
 				</div>
 			</div>
 		</object>
 	</a>
-	<? } ?>
+	<?php } ?>
 <?php }
 
 function printToggleButton($that) {

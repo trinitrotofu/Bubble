@@ -144,12 +144,12 @@
                 threshold: 700,
                 effect: 'fadeIn',
                 effectTime: 1000,
-                defaultImage: "<? $this->options->themeUrl("images/Loading.gif"); ?>"
+                defaultImage: "<?php $this->options->themeUrl("images/Loading.gif"); ?>"
             });
             $("div[data-src]").Lazy({
                 threshold: 700,
                 effect: 'fadeIn',
-                placeholder: "<? $this->options->themeUrl("images/Loading.gif"); ?>",
+                placeholder: "<?php $this->options->themeUrl("images/Loading.gif"); ?>",
                 effectTime: 1000
             });
 			<?php if($this->options->katex): ?>
