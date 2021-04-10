@@ -120,6 +120,15 @@
 								<a class="nav-link" href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
 							</li>
 						<?php endwhile; ?>
+						<?php
+							$links = explode("$@!$", $this->options->headerLinks);
+							foreach ($links as $key => $value) {
+								$link = explode("$$", $value)
+						?>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo $link[1]; ?>" title="<?php echo $link[0]; ?>"><?php echo $link[0]; ?></a>
+							</li>
+						<?php }; ?>
 						<li class="navbar_search_container">
 							<form method="post" action="" id="search">
 								<div class="input-group input-group-alternative">

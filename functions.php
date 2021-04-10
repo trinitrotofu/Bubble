@@ -232,6 +232,107 @@ function themeConfig($form) {
 		),
 		'0', _t('默认 TOC 目录展开状态'), _t('选择打开文章时 TOC 目录的展开状态'));
 	$form->addInput($toc_enable);
+
+	$header_links_html = '
+	<style>
+		input[name=headerLinks]{
+			display:none;
+		}
+	</style>
+	<script>
+	$(document).ready(function(){
+		var editTemplate = \'<li class="size-5"><input type="checkbox"><span rel="$Link$">$Name$</span><a class="tag-edit-link linkEditer"><i class="i-edit"></i></a><a class="tag-edit-link linkDeleter"><i class="i-delete"></i></a></li>\'
+		var finalTextform = $("input[name=headerLinks]")
+		var linkList = finalTextform.val().split("$@!$")
+		var isInEditing = -1
+		var editTag = (is) => {
+			isInEditing = is
+			if(isInEditing == -1){
+				$("#linkTagAddButton").text("添加")
+				$("#linkTagCancleButton").hide()
+			}else{
+				$("#linkTagAddButton").text("编辑")
+				$("#linkTagCancleButton").show()
+			}
+			
+		}
+
+		var updateList = () => {
+			var renderedHtml = ""
+			for (var eachLink in linkList){
+				link = linkList[eachLink].split("$$")
+				renderedHtml += editTemplate.replace("$Name$", link[0]).replace("$Link$", link[1])
+			}
+			$("#linkTags").html(renderedHtml)
+
+			$(".linkEditer").click(function (){
+				var span = $(this).prev()
+				$("#linkTagAddLink").val(span.attr("rel"))
+				$("#linkTagAddName").val(span.text())
+				editTag(linkList.indexOf(span.text() + "$$" + span.attr("rel")))
+			})
+			$(".linkDeleter").click(function (){
+				var span = $(this).prev().prev()
+				linkList.splice(linkList.indexOf(span.text() + "$$" + span.attr("rel")), 1)
+				updateList()
+				updateForm()
+			})
+		}
+		var updateForm = () => {
+			finalTextform.val(linkList.join("$@!$"))
+		}
+
+		var clear = () => {
+			$("#linkTagAddLink").val("")
+			$("#linkTagAddName").val("")
+		}
+		updateList()
+		
+		$("#linkTagAddButton").click(() => {
+			var link = $("#linkTagAddName").val() + "$$" + $("#linkTagAddLink").val()
+			if(isInEditing == -1){
+				if($("#linkTagAddName").val() != "" && $("#linkTagAddLink").val() != ""){
+					linkList.push(link)
+				}
+			}else{
+				linkList[isInEditing] = link
+				editTag(-1)
+			}
+			updateList()
+			updateForm()
+			clear()
+		})
+
+		$("#linkTagCancleButton").click(() => {
+			editTag(-1)
+			clear()
+		})
+	})
+	</script>
+	</p>
+
+		<ul class="typecho-list-notable tag-list clearfix" id="linkTags">
+		</ul>
+		<p class="description"></p>
+		<div class="row">
+			<div class="col-mb-12 col-tb-4">
+				<label class="typecho-label">链接名称</label>
+				<input id="linkTagAddName" type="text" class="text" value="">
+			</div>
+			<div class="col-mb-12 col-tb-4">
+				<label class="typecho-label">链接网址</label>
+				<input id="linkTagAddLink" type="text" class="text" value="">
+			</div>
+			<div class="col-mb-12 col-tb-3">
+				<label class="typecho-label"> &nbsp;</label>
+				<button type="button" class="btn primary" id="linkTagAddButton">添加</button>
+				<button type="button" class="btn" id="linkTagCancleButton" style="display: none;">取消</button>
+			</div>
+		</div>
+	
+	<p class="description">编辑在顶部显示的链接';
+	$headerLinks = new Typecho_Widget_Helper_Form_Element_Text('headerLinks', NULL, '', _t('顶部跳转链接'), $header_links_html);
+	$form->addInput($headerLinks);
 }
 
 function printCategory($that, $icon = 0) { ?>
