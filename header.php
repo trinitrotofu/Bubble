@@ -126,7 +126,7 @@
 								$link = explode("$$", $value)
 						?>
 							<li class="nav-item">
-								<a class="nav-link" href="<?php echo $link[1]; ?>" title="<?php echo $link[0]; ?>"><?php echo $link[0]; ?></a>
+								<a class="nav-link" target="_blank" href="<?php echo $link[1]; ?>" title="<?php echo $link[0]; ?>"><?php echo $link[0]; ?></a>
 							</li>
 						<?php }; ?>
 						<li class="navbar_search_container">

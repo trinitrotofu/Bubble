@@ -83,7 +83,7 @@
 								<div class="form-group">
 									<div class="input-group mb-4">
 										<div class="input-group-prepend">
-											<span class="input-group-text" style="padding: .4rem .5rem;">
+											<span class="input-group-text" style="padding: 0rem .5rem;">
             									<div id="author-head" class="icon-shape rounded-circle text-white" style="width: 2rem;height: 2rem;background-image: url(https://secure.gravatar.com/avatar/);background-position: center;background-size: cover;background-repeat: no-repeat;"></div>
             								</span>
 										</div>

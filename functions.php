@@ -510,3 +510,8 @@ function GetCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, th
 function themeInit($archive) {
 
 }
+
+function themeFields($layout) {
+    $logoUrl = new Typecho_Widget_Helper_Form_Element_Text('pic', NULL, NULL, _t('文章头图地址'), _t('在这里填入一个图片URL地址, 就可以让文章加上头图'));
+    $layout->addItem($logoUrl);
+}

@@ -15665,7 +15665,6 @@ table {
     margin-top: 8rem;
     margin-left: auto;
     margin-right: auto;
-    transition: transform 0.4s ease-in-out;
 }
 
 .content-card-head {
@@ -15962,10 +15961,6 @@ p {
 
 .list-image-card{
     border-radius: 10px;
-}
-
-.content-card:hover{
-    transform: scale(1.02) translateY(-5px);
 }
 
 .list-card-content{
