@@ -232,6 +232,18 @@ function themeConfig($form) {
 		),
 		'0', _t('默认 TOC 目录展开状态'), _t('选择打开文章时 TOC 目录的展开状态'));
 	$form->addInput($toc_enable);
+	$comment_indent_style = new Typecho_Widget_Helper_Form_Element_Radio('comment_indent_style',
+		array('native' => _t('Typecho风格'),
+			'bubble' => _t('Bubble风格'),
+		),
+		'bubble', _t('评论缩进风格'), _t('选择评论缩进的风格，Typecho风格会为每一层回复进行缩进，Bubble风格会在需要的时候合并评论到同一层里，方便阅读'));
+	$form->addInput($comment_indent_style);
+	$comment_object_nick = new Typecho_Widget_Helper_Form_Element_Radio('comment_object_nick',
+		array('0' => _t('不显示'),
+			'1' => _t('显示'),
+		),
+		'1', _t('被回复人的昵称显示'), _t('选择是否显示被回复人的昵称，显示"aa 回复 bb"，或者只显示"aa"'));
+	$form->addInput($comment_object_nick);
 
 	$header_links_html = '
 	<style>
@@ -495,7 +507,7 @@ function getCatalog() {
 	echo $index;
 }
 
-function GetCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, the parent and the grandparent by default
+function getCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, the parent and the grandparent by default
 	$db = Typecho_Db::get();
 	$commentLine = [];
 	while((count($commentLine) < $depth) and (isset($coid) and 0 != $coid)) {
@@ -505,6 +517,30 @@ function GetCommentLineInDb($coid, $depth=3) { // 3 for getting this comment, th
 		$coid = $row['parent'];
 	}
 	return $commentLine;
+}
+
+function shouldCommentIndent($comment, &$comment_line=NULL) {
+	$commentIndentStyle = Helper::options()->comment_indent_style;
+	$commentLine = getCommentLineInDb($comment->coid);
+	$isTopLevel = count($commentLine) == 1;
+	$thisAuthor = $comment->author;
+	$parentAuthor = count($commentLine) >= 2? $commentLine[1]['author']:NULL;
+	$grandparentAuthor = count($commentLine) >= 3? $commentLine[2]['author']:NULL;
+	$indent = false;
+	if($commentIndentStyle==NULL || $commentIndentStyle=='bubble') {
+		$indent = !$isTopLevel; // 顶层回复不需要缩进，非顶层回复才需要缩进
+		// 有父评论和爷评论
+		if($parentAuthor && $grandparentAuthor) {
+			// 本评论和爷评论或者父评论是同一人发布时，不需要缩进
+			$indent &= !($thisAuthor == $parentAuthor || $thisAuthor == $grandparentAuthor);
+		}
+	} else {
+		$indent = true;
+	}
+	if($comment_line!==NULL) {
+		$comment_line = $commentLine;
+	}
+	return $indent;
 }
 
 function themeInit($archive) {
