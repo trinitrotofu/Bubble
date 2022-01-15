@@ -4,7 +4,7 @@ Typecho 清新风格响应式主题。
 
 化繁为简，如沐清风。
 
-Demo:  [https://tntofu.com/](https://tntofu.com/)
+Demo:  [https://typecho.tntofu.com/](https://typecho.tntofu.com/)
 
 如果觉得本主题还不错的话可以给个 star 哦，这是对开源主题作者们最大的鼓励。
 
